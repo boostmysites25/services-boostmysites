@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { adminDataService } from "@/services/adminDataService";
 import { Project } from "@/data/projects";
 
-const WebAppsPortfolio = ({ caseStudyDetailsLink }) => {
+const WebAppsPortfolio = () => {
   const [portfolioProjects, setPortfolioProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -93,7 +93,7 @@ const WebAppsPortfolio = ({ caseStudyDetailsLink }) => {
                     </div>
                   </div>
                   <Link
-                    to={`${caseStudyDetailsLink}/${project.slug || project.id}`}
+                    to={`/case-study/${project.slug || project.id}`}
                     className="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-medium"
                   >
                     View Case Study <ArrowRight className="ml-1 h-4 w-4" />

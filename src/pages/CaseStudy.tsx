@@ -1,11 +1,9 @@
 
 import { useParams, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import CaseStudyLoading from '@/components/case-study/CaseStudyLoading';
 import CaseStudyComponents from '@/components/case-study/CaseStudyComponents';
-import { getProjectSummary, loadFullProject } from '@/services/projectService';
+import { loadFullProject } from '@/services/projectService';
 import { onProjectsChange } from '@/services/caseStudyDataService';
 import { extractIdFromSlug } from '@/lib/slugUtils';
 import { Project } from '@/data/projects';
@@ -98,9 +96,7 @@ const CaseStudy = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      <Header />
       <CaseStudyComponents project={project} />
-      <Footer />
     </div>
   );
 };

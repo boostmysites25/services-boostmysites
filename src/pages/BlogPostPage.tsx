@@ -1,8 +1,6 @@
 
 import { useParams, Navigate } from 'react-router-dom';
 import { useMemo, useState, useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import BlogPostHeader from '@/components/blog/BlogPostHeader';
 import BlogPostContent from '@/components/blog/BlogPostContent';
 import BlogPostSidebar from '@/components/blog/BlogPostSidebar';
@@ -128,7 +126,7 @@ const BlogPostPage = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      <Header />
+      {/* <Header /> */}
       
       <article className="pt-24 pb-20">
         <div className="container mx-auto px-6">
@@ -144,7 +142,7 @@ const BlogPostPage = () => {
         </div>
       </article>
       
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

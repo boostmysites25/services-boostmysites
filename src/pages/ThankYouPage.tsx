@@ -21,13 +21,11 @@ const ThankYouPage = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      <Header />
       <main className="pt-16">
         <div className="container mx-auto px-6 py-12">
           <SuccessMessage />
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

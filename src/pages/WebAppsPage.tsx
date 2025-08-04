@@ -23,9 +23,6 @@ const WebAppsPage = ({
   service,
   salespersonEmail,
 }: WebAppsPageProps) => {
-  const caseStudyDetailsLink = salespersonData 
-    ? `${salesperson}/${service}/case-study` 
-    : "/case-study";
 
   return (
     <div
@@ -41,7 +38,7 @@ const WebAppsPage = ({
     >
       {/* <Header /> */}
       <WebAppsHero />
-      <WebAppsPortfolio caseStudyDetailsLink={caseStudyDetailsLink} />
+      <WebAppsPortfolio />
       <WebAppsCTA />
       <WebAppsCaseStudies />
       <WebAppsFeatures />

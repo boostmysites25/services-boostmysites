@@ -1,7 +1,4 @@
-
 import { useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 const PrivacyPolicyPage = () => {
   useEffect(() => {
@@ -20,7 +17,6 @@ const PrivacyPolicyPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
       <main className="pt-16">
         <div className="container mx-auto px-6 py-12 max-w-4xl">
           {/* Header Section */}
@@ -272,7 +268,6 @@ const PrivacyPolicyPage = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

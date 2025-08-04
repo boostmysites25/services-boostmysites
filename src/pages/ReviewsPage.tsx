@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Star, Filter, Zap, Shield, Users, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import ReviewCard from '@/components/ReviewCard';
 
@@ -188,8 +186,6 @@ const ReviewsPage = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.02),transparent_50%)]"></div>
       
-      <Header />
-      
       {/* Hero Section with Video Background */}
       <section className="relative pt-20 pb-12 px-6 min-h-[70vh] flex items-center overflow-hidden">
         {/* Video Background */}
@@ -338,7 +334,6 @@ const ReviewsPage = () => {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 };

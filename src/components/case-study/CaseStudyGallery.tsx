@@ -68,7 +68,7 @@ const CaseStudyGallery = ({ project }: CaseStudyGalleryProps) => {
                 <X className="h-8 w-8" />
               </button>
 
-              <button 
+              {/* <button 
                 onClick={prevImage}
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-cyan-400 transition-colors duration-300"
               >
@@ -80,12 +80,12 @@ const CaseStudyGallery = ({ project }: CaseStudyGalleryProps) => {
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-cyan-400 transition-colors duration-300"
               >
                 <ChevronRight className="h-8 w-8" />
-              </button>
+              </button> */}
 
               <OptimizedImage
                 src={project.gallery[selectedImage]}
                 alt={`${project.title} screenshot ${selectedImage + 1}`}
-                className="max-w-full max-h-full rounded-lg"
+                className="max-w-[90vw] max-h-[80vh] rounded-lg"
                 priority={true}
               />
             </div>

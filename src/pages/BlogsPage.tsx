@@ -1,7 +1,5 @@
 
 import { useState, useMemo, useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import BlogHero from '@/components/blog/BlogHero';
 import BlogGrid from '@/components/blog/BlogGrid';
 import BlogCategories from '@/components/blog/BlogCategories';
@@ -62,7 +60,7 @@ const BlogsPage = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      <Header />
+      {/* <Header /> */}
       <BlogHero />
       
       <section className="py-20">
@@ -87,7 +85,7 @@ const BlogsPage = () => {
         </div>
       </section>
       
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

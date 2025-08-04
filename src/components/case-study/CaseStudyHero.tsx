@@ -24,7 +24,7 @@ const CaseStudyHero = ({ project }: CaseStudyHeroProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 pt-32">
+      <div className="container mx-auto px-6 relative z-10 pt-0">
         {/* Back Navigation and Live View */}
         <div className="flex items-center justify-between mb-8">
           <Link 
