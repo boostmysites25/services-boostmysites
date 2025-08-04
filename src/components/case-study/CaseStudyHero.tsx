@@ -1,15 +1,15 @@
-
-import { ArrowLeft, Calendar, Users, Award } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { Project } from '@/data/projects';
-import OptimizedImage from '@/components/ui/OptimizedImage';
-import LiveViewButton from '@/components/ui/LiveViewButton';
+import { ArrowLeft, Calendar, Users, Award } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Project } from "@/data/projects";
+import OptimizedImage from "@/components/ui/OptimizedImage";
+import LiveViewButton from "@/components/ui/LiveViewButton";
 
 interface CaseStudyHeroProps {
   project: Project;
 }
 
 const CaseStudyHero = ({ project }: CaseStudyHeroProps) => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-screen flex items-center bg-gradient-to-b from-gray-900 to-black overflow-hidden">
       {/* Background Image */}
@@ -27,16 +27,16 @@ const CaseStudyHero = ({ project }: CaseStudyHeroProps) => {
       <div className="container mx-auto px-6 relative z-10 pt-0">
         {/* Back Navigation and Live View */}
         <div className="flex items-center justify-between mb-8">
-          <Link 
-            to="/portfolio"
+          <button
+            onClick={() => navigate(-1)}
             className="inline-flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors duration-300"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Back to Portfolio</span>
-          </Link>
-          
+            <span>Go back</span>
+          </button>
+
           {project.liveUrl && (
-            <LiveViewButton 
+            <LiveViewButton
               url={project.liveUrl}
               variant="outline"
               className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black"
@@ -54,7 +54,9 @@ const CaseStudyHero = ({ project }: CaseStudyHeroProps) => {
                 className="w-12 h-12 rounded-full border-2 border-cyan-400"
               />
               <div>
-                <h3 className="text-cyan-400 font-semibold">{project.client}</h3>
+                <h3 className="text-cyan-400 font-semibold">
+                  {project.client}
+                </h3>
                 <p className="text-gray-400 text-sm">{project.industry}</p>
               </div>
             </div>
@@ -88,17 +90,29 @@ const CaseStudyHero = ({ project }: CaseStudyHeroProps) => {
 
             {/* Quick Metrics */}
             <div className="flex flex-wrap gap-3">
-              {Object.entries(project.metrics).slice(0, 3).map(([key, value]) => (
-                <div key={key} className="bg-cyan-500/10 border border-cyan-400/30 rounded-lg px-4 py-2">
-                  <div className="text-cyan-400 font-bold text-lg">{value}</div>
-                  <div className="text-gray-300 text-sm capitalize">{key}</div>
-                </div>
-              ))}
+              {Object.entries(project.metrics)
+                .slice(0, 3)
+                .map(([key, value]) => (
+                  <div
+                    key={key}
+                    className="bg-cyan-500/10 border border-cyan-400/30 rounded-lg px-4 py-2"
+                  >
+                    <div className="text-cyan-400 font-bold text-lg">
+                      {value}
+                    </div>
+                    <div className="text-gray-300 text-sm capitalize">
+                      {key}
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
 
           {/* Project Image */}
-          <div className="relative animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <div
+            className="relative animate-fade-in"
+            style={{ animationDelay: "200ms" }}
+          >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <OptimizedImage
                 src={project.gallery[0] || project.image}
