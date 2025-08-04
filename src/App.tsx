@@ -102,8 +102,6 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         
-        {/* Floating WhatsApp Button - appears on all pages */}
-        <FloatingWhatsAppButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
