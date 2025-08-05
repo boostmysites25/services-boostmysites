@@ -12,6 +12,15 @@ import MobileAppsPage from "./MobileAppsPage";
 import SaasPage from "./SaasPage";
 import AiAutomationPage from "./AiAutomationPage";
 import AiCallingPage from "./AiCallingPage";
+import AiDevelopmentPage from "./AiDevelopmentPage";
+import BlockchainDevelopmentPage from "./BlockchainDevelopmentPage";
+import ArVrDevelopmentPage from "./ArVrDevelopmentPage";
+import ChatbotDevelopmentPage from "./ChatbotDevelopmentPage";
+import CloudComputingPage from "./CloudComputingPage";
+import DataAnalyticsPage from "./DataAnalyticsPage";
+import GameDevelopmentPage from "./GameDevelopmentPage";
+import IotDevelopmentPage from "./IotDevelopmentPage";
+import UxuiDesignPage from "./UxuiDesignPage";
 
 const SalespersonServicePage = () => {
   const { salesperson, service } = useParams<{
@@ -116,6 +125,87 @@ const SalespersonServicePage = () => {
       case "ai-calling":
         return (
           <AiCallingPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "ai-development":
+        return (
+          <AiDevelopmentPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "blockchain-development":
+        return (
+          <BlockchainDevelopmentPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "ar-vr-development":
+        return (
+          <ArVrDevelopmentPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "chatbot-development":
+        return (
+          <ChatbotDevelopmentPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "cloud-computing":
+        return (
+          <CloudComputingPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "data-analytics":
+        return (
+          <DataAnalyticsPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "game-development":
+        return (
+          <GameDevelopmentPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "iot-development":
+        return (
+          <IotDevelopmentPage
+            salespersonData={salespersonData}
+            salesperson={salesperson}
+            service={service}
+            salespersonEmail={salespersonData.salesperson.email}
+          />
+        );
+      case "ux-ui-design":
+        return (
+          <UxuiDesignPage
             salespersonData={salespersonData}
             salesperson={salesperson}
             service={service}

@@ -8,6 +8,7 @@ import WebAppsFeatures from "@/components/webapps/WebAppsFeatures";
 import WebAppsProcess from "@/components/webapps/WebAppsProcess";
 import WebAppsCTA from "@/components/webapps/WebAppsCTA";
 import LandingPageContactForm from "@/components/LandingPageContactForm";
+import DynamicContactForm from "@/components/DynamicContactForm";
 import { Link } from "react-scroll";
 
 interface WebAppsPageProps {
@@ -41,16 +42,16 @@ const WebAppsPage = ({
       <WebAppsPortfolio />
       <WebAppsCTA />
       <WebAppsCaseStudies />
+      
+      {/* Dynamic Contact Form - injected after Success Stories if URL parameters exist */}
+      <DynamicContactForm position="after-success-stories" />
+      
       <WebAppsFeatures />
       <WebAppsProcess />
-      {salespersonData && (
-        <LandingPageContactForm
-          salespersonData={salespersonData}
-          salesperson={salesperson}
-          service={service}
-          salespersonEmail={salespersonEmail}
-        />
-      )}
+      
+      {/* Dynamic Contact Form - also available at bottom */}
+      <DynamicContactForm position="bottom" />
+      
       {/* <Footer /> */}
     </div>
   );

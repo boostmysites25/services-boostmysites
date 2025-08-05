@@ -23,6 +23,17 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import NotFound from "./pages/NotFound";
 import SalespersonServicePage from "./pages/SalespersonServicePage";
 
+// Additional service pages
+import AiDevelopmentPage from "./pages/AiDevelopmentPage";
+import BlockchainDevelopmentPage from "./pages/BlockchainDevelopmentPage";
+import ArVrDevelopmentPage from "./pages/ArVrDevelopmentPage";
+import ChatbotDevelopmentPage from "./pages/ChatbotDevelopmentPage";
+import CloudComputingPage from "./pages/CloudComputingPage";
+import DataAnalyticsPage from "./pages/DataAnalyticsPage";
+import GameDevelopmentPage from "./pages/GameDevelopmentPage";
+import IotDevelopmentPage from "./pages/IotDevelopmentPage";
+import UxuiDesignPage from "./pages/UxuiDesignPage";
+
 // Admin pages
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -68,15 +79,29 @@ const App = () => (
           <Route path="/case-study/:slug" element={<CaseStudy />} />
           
           {/* Blog routes */}
-          {/* <Route path="/blogs" element={<BlogsPage />} /> */}
+          <Route path="/blogs" element={<BlogsPage />} />
           {/* Blog post routes - supports both slug-based and ID-based URLs */}
-          {/* <Route path="/blog/:slug" element={<BlogPostPage />} /> */}
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           
+          {/* Service landing pages */}
           <Route path="/web-apps" element={<WebAppsPage />} />
           <Route path="/mobile-apps" element={<MobileAppsPage />} />
           <Route path="/saas" element={<SaasPage />} />
           <Route path="/ai-automation" element={<AiAutomationPage />} />
           <Route path="/ai-calling" element={<AiCallingPage />} />
+          
+          {/* Additional service pages */}
+          <Route path="/ai-development" element={<AiDevelopmentPage />} />
+          <Route path="/blockchain-development" element={<BlockchainDevelopmentPage />} />
+          <Route path="/ar-vr-development" element={<ArVrDevelopmentPage />} />
+          <Route path="/chatbot-development" element={<ChatbotDevelopmentPage />} />
+          <Route path="/cloud-computing" element={<CloudComputingPage />} />
+          <Route path="/data-analytics" element={<DataAnalyticsPage />} />
+          <Route path="/game-development" element={<GameDevelopmentPage />} />
+          <Route path="/iot-development" element={<IotDevelopmentPage />} />
+          <Route path="/ux-ui-design" element={<UxuiDesignPage />} />
+          
+          {/* Other pages */}
           <Route path="/reviews" element={<ReviewsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/thank-you" element={<ThankYouPage />} />

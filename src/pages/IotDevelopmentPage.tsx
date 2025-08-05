@@ -1,16 +1,53 @@
 import { Wifi, Smartphone, Cloud, Shield, BarChart3, Zap } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
+import DynamicContactForm from '@/components/DynamicContactForm';
 
-const IotDevelopmentPage = () => {
+interface IotDevelopmentPageProps {
+  salespersonData?: any;
+  salesperson?: any;
+  service?: any;
+  salespersonEmail?: string;
+}
+
+const IotDevelopmentPage = ({
+  salespersonData,
+  salesperson,
+  service,
+  salespersonEmail,
+}: IotDevelopmentPageProps) => {
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate('/contact#form');
+    const handleGetStarted = () => {
+    // Scroll to the nearest contact form
+    const contactForms = document.querySelectorAll('section');
+    let nearestForm = null;
+    let minDistance = Infinity;
+    
+    contactForms.forEach((section) => {
+      const hasContactForm = section.querySelector('form') || 
+                           section.textContent.includes('Get in Touch') ||
+                           section.textContent.includes('Contact');
+      
+      if (hasContactForm) {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestForm = section;
+        }
+      }
+    });
+    
+    if (nearestForm) {
+      nearestForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback: scroll to bottom where contact form usually is
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
   };
 
   const features = [
@@ -143,7 +180,6 @@ const IotDevelopmentPage = () => {
         backgroundAttachment: 'fixed'
       }}
     >
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
@@ -151,7 +187,7 @@ const IotDevelopmentPage = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-center">
-              <span className="bg-gradient-to-r from-cyan-300 via-blue-500 via-cyan-400 to-blue-400 bg-clip-text text-transparent inline-block animate-gradient bg-[length:400%_100%] typewriter">
+              <span className="bg-gradient-to-r from-orange-300 to-orange-400 bg-clip-text text-transparent inline-block animate-gradient bg-[length:400%_100%] typewriter">
                 IoT Development
               </span>
             </h1>
@@ -161,13 +197,13 @@ const IotDevelopmentPage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={handleGetStarted}
-                className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl font-semibold hover:from-emerald-400 hover:to-teal-500 transition-all duration-300 transform hover:scale-105"
+                className="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl font-semibold hover:from-orange-400 hover:to-orange-500 transition-all duration-300 transform hover:scale-105"
               >
                 Start IoT Project
               </button>
               <Link 
                 to="/portfolio"
-                className="px-8 py-4 border border-emerald-400/30 rounded-xl font-semibold hover:bg-emerald-500/10 transition-all duration-300 inline-flex items-center justify-center"
+                className="px-8 py-4 border border-orange-400/30 rounded-xl font-semibold hover:bg-orange-500/10 transition-all duration-300 inline-flex items-center justify-center"
               >
                 View IoT Solutions
               </Link>
@@ -180,29 +216,38 @@ const IotDevelopmentPage = () => {
       <ServicePortfolioSection 
         serviceId="iot-development"
         serviceName="IoT Development"
-        accentColor="blue"
+        accentColor="orange"
       />
 
       {/* Case Studies Section */}
       <ServiceCaseStudiesSection 
         serviceName="IoT Development"
         caseStudies={caseStudies}
-        accentColor="text-blue-400"
+        accentColor="text-orange-400"
+      />
+      
+      {/* Dynamic Contact Form - injected after Success Stories if URL parameters exist */}
+      <DynamicContactForm 
+        position="after-success-stories" 
+        accentColor="orange"
+        backgroundColor="transparent"
       />
 
       {/* Features Section */}
       <section className="py-20 bg-black/80">
+        {/* Orange separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-orange-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-blue-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">IoT Technologies</h2>
+            <h2 className="text-4xl font-bold mb-4 text-orange-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">IoT Technologies</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Complete IoT development services from devices to cloud platforms.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="p-8 rounded-2xl bg-gray-800/50 border border-gray-700/50 hover:border-emerald-400/50 transition-all duration-300">
-                <feature.icon className="h-12 w-12 text-emerald-400 mb-6" />
+              <div key={index} className="p-8 rounded-2xl bg-gray-800/50 border border-gray-700/50 hover:border-orange-400/50 transition-all duration-300">
+                <feature.icon className="h-12 w-12 text-orange-400 mb-6" />
                 <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
                 <p className="text-gray-400 leading-relaxed">{feature.description}</p>
               </div>
@@ -213,9 +258,11 @@ const IotDevelopmentPage = () => {
 
       {/* Process Section */}
       <section className="py-20 bg-black/80">
+        {/* Orange separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-orange-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-blue-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Our IoT Development Process</h2>
+            <h2 className="text-4xl font-bold mb-4 text-orange-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Our IoT Development Process</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               End-to-end IoT solution development from concept to deployment.
             </p>
@@ -223,7 +270,7 @@ const IotDevelopmentPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {process.map((item, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
                   {item.step}
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
@@ -238,28 +285,34 @@ const IotDevelopmentPage = () => {
       <ServicePricingSection 
         serviceName="IoT Development"
         pricingTiers={pricingTiers}
-        accentColor="text-blue-400"
-        buttonAccentColor="blue"
+        accentColor="text-orange-400"
+        buttonAccentColor="orange"
       />
-
+      
+      {/* Separator after Pricing */}
+      <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-orange-300 to-transparent"></div>
+      
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 relative">
+      <section className="py-20 bg-gradient-to-r from-orange-500/20 to-orange-500/20 relative">
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
-          <h2 className="text-4xl font-bold mb-4 text-blue-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Ready to Build Smart Solutions?</h2>
+          <h2 className="text-4xl font-bold mb-4 text-orange-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Ready to Build Smart Solutions?</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Let's create IoT solutions that connect your business to the future of smart technology.
           </p>
           <button 
             onClick={handleGetStarted}
-            className="inline-block px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl font-semibold hover:from-emerald-400 hover:to-teal-500 transition-all duration-300 transform hover:scale-105"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl font-semibold hover:from-orange-400 hover:to-orange-500 transition-all duration-300 transform hover:scale-105"
           >
             Get Started Today
           </button>
         </div>
-      </section>
-
-      <Footer />
+      </section>{/* Dynamic Contact Form - also available at bottom */}
+      <DynamicContactForm 
+        position="bottom" 
+        accentColor="orange"
+        backgroundColor="transparent"
+      />
     </div>
   );
 };

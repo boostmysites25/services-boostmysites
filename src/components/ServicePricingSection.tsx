@@ -29,6 +29,7 @@ const ServicePricingSection = ({ serviceName, pricingTiers, accentColor = "text-
         case 'pink': return `${baseClasses} bg-pink-500 text-white hover:bg-pink-400 shadow-lg`;
         case 'blue': return `${baseClasses} bg-blue-500 text-white hover:bg-blue-400 shadow-lg`;
         case 'green': return `${baseClasses} bg-green-500 text-white hover:bg-green-400 shadow-lg`;
+        case 'orange': return `${baseClasses} bg-orange-500 text-white hover:bg-orange-400 shadow-lg`;
         default: return `${baseClasses} bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg`;
       }
     } else {
@@ -41,6 +42,7 @@ const ServicePricingSection = ({ serviceName, pricingTiers, accentColor = "text-
         case 'pink': return `${baseClasses} border-2 border-pink-400 text-pink-400 hover:bg-pink-500 hover:text-white`;
         case 'blue': return `${baseClasses} border-2 border-blue-400 text-blue-400 hover:bg-blue-500 hover:text-white`;
         case 'green': return `${baseClasses} border-2 border-green-400 text-green-400 hover:bg-green-500 hover:text-white`;
+        case 'orange': return `${baseClasses} border-2 border-orange-400 text-orange-400 hover:bg-orange-500 hover:text-white`;
         default: return `${baseClasses} border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground`;
       }
     }
@@ -56,6 +58,7 @@ const ServicePricingSection = ({ serviceName, pricingTiers, accentColor = "text-
       case 'pink': return 'text-pink-400';
       case 'blue': return 'text-blue-400';
       case 'green': return 'text-green-400';
+      case 'orange': return 'text-orange-400';
       default: return 'text-primary';
     }
   };
@@ -70,6 +73,7 @@ const ServicePricingSection = ({ serviceName, pricingTiers, accentColor = "text-
       case 'pink': return 'bg-pink-500 text-white';
       case 'blue': return 'bg-blue-500 text-white';
       case 'green': return 'bg-green-500 text-white';
+      case 'orange': return 'bg-orange-500 text-white';
       default: return 'bg-primary text-primary-foreground';
     }
   };
@@ -84,11 +88,15 @@ const ServicePricingSection = ({ serviceName, pricingTiers, accentColor = "text-
       case 'pink': return 'border-pink-400';
       case 'blue': return 'border-blue-400';
       case 'green': return 'border-green-400';
+      case 'orange': return 'border-orange-400';
       default: return 'border-primary';
     }
   };
   return (
-    <section className={`py-20 bg-black/80 border-t ${buttonAccentColor === 'pink' ? 'border-pink-400/40' : buttonAccentColor === 'blue' ? 'border-blue-400/40' : buttonAccentColor === 'green' ? 'border-green-400/40' : buttonAccentColor === 'purple' ? 'border-purple-400/40' : buttonAccentColor === 'yellow' ? 'border-yellow-400/40' : buttonAccentColor === 'red' ? 'border-red-400/40' : buttonAccentColor === 'orange' ? 'border-orange-400/10' : buttonAccentColor === 'indigo' ? 'border-indigo-400/40' : buttonAccentColor === 'teal' ? 'border-teal-400/40' : 'border-gray-400/10'}`}>
+    <section className="py-20 bg-black/80">
+      {/* Separator line */}
+      <div className={`w-full h-0.5 bg-gradient-to-r from-transparent ${buttonAccentColor === 'pink' ? 'via-pink-300' : buttonAccentColor === 'blue' ? 'via-blue-300' : buttonAccentColor === 'green' ? 'via-green-300' : buttonAccentColor === 'purple' ? 'via-purple-300' : buttonAccentColor === 'yellow' ? 'via-yellow-300' : buttonAccentColor === 'red' ? 'via-red-300' : buttonAccentColor === 'orange' ? 'via-orange-300' : buttonAccentColor === 'indigo' ? 'via-indigo-300' : buttonAccentColor === 'teal' ? 'via-teal-300' : 'via-gray-300'} to-transparent mb-8`}></div>
+      
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className={`text-4xl font-bold mb-4 ${getAccentColorClass()} drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]`}>{serviceName} Pricing</h2>

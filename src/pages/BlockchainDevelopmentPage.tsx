@@ -1,16 +1,53 @@
 import { Shield, Coins, Link, Users, Zap, Lock } from 'lucide-react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
+import DynamicContactForm from '@/components/DynamicContactForm';
 
-const BlockchainDevelopmentPage = () => {
+interface BlockchainDevelopmentPageProps {
+  salespersonData?: any;
+  salesperson?: any;
+  service?: any;
+  salespersonEmail?: string;
+}
+
+const BlockchainDevelopmentPage = ({
+  salespersonData,
+  salesperson,
+  service,
+  salespersonEmail,
+}: BlockchainDevelopmentPageProps) => {
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate('/contact#form');
+    const handleGetStarted = () => {
+    // Scroll to the nearest contact form
+    const contactForms = document.querySelectorAll('section');
+    let nearestForm = null;
+    let minDistance = Infinity;
+    
+    contactForms.forEach((section) => {
+      const hasContactForm = section.querySelector('form') || 
+                           section.textContent.includes('Get in Touch') ||
+                           section.textContent.includes('Contact');
+      
+      if (hasContactForm) {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestForm = section;
+        }
+      }
+    });
+    
+    if (nearestForm) {
+      nearestForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback: scroll to bottom where contact form usually is
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
   };
 
   const features = [
@@ -65,8 +102,6 @@ const BlockchainDevelopmentPage = () => {
         backgroundAttachment: 'fixed'
       }}
     >
-      <Header />
-      
       {/* Hero Section */}
       <section className="pt-32 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-black/80"></div>
@@ -100,9 +135,18 @@ const BlockchainDevelopmentPage = () => {
 
       <ServicePortfolioSection serviceId="blockchain-development" serviceName="Blockchain Development" accentColor="yellow" />
       <ServiceCaseStudiesSection serviceName="Blockchain Development" caseStudies={[{client: 'CryptoFinance', industry: 'DeFi', challenge: 'Need secure DeFi platform', solution: 'Smart contract development', results: ['99.9% security', '$50M locked', '100k users', 'Zero hacks'], testimonial: "Secure and scalable DeFi platform", clientName: 'Alex Chen', clientRole: 'CTO, CryptoFinance', clientImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80', duration: '12 weeks', teamSize: '4 developers'}]} accentColor="text-yellow-400" />
+      
+      {/* Dynamic Contact Form - injected after Success Stories if URL parameters exist */}
+      <DynamicContactForm 
+        position="after-success-stories" 
+        accentColor="yellow"
+        backgroundColor="transparent"
+      />
 
       {/* Features Section */}
-      <section className="py-20 bg-black/80 border-t border-yellow-400/40">
+      <section className="py-20 bg-black/80">
+        {/* Yellow separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-yellow-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-yellow-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Blockchain Technologies</h2>
@@ -123,7 +167,9 @@ const BlockchainDevelopmentPage = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-black/80 border-t border-yellow-400/40">
+      <section className="py-20 bg-black/80">
+        {/* Yellow separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-yellow-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-yellow-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Our Blockchain Development Process</h2>
@@ -147,6 +193,9 @@ const BlockchainDevelopmentPage = () => {
 
       <ServicePricingSection serviceName="Blockchain Development" pricingTiers={[{name: 'Smart Contract', price: '$20,000', description: 'Basic blockchain solution', features: ['Smart Contract Development', 'Security Audit', 'Testnet Deployment', 'Documentation'], popular: false}, {name: 'DeFi Platform', price: '$60,000', description: 'Complete DeFi solution', features: ['Advanced Smart Contracts', 'Frontend Development', 'Multi-chain Support', 'Security Audits', 'Liquidity Integration'], popular: true}, {name: 'Enterprise Blockchain', price: 'Custom', description: 'Full enterprise solution', features: ['Custom Blockchain', 'Enterprise Integration', 'Advanced Security', 'Dedicated Support'], popular: false}]} accentColor="text-yellow-400" buttonAccentColor="yellow" />
 
+      {/* Separator after Pricing */}
+      <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 relative">
         <div className="container mx-auto px-6 text-center relative z-10">
@@ -163,7 +212,12 @@ const BlockchainDevelopmentPage = () => {
         </div>
       </section>
 
-      <Footer />
+      {/* Dynamic Contact Form - handles both regular and salesperson scenarios */}
+      <DynamicContactForm 
+        position="bottom" 
+        accentColor="yellow"
+        backgroundColor="transparent"
+      />
     </div>
   );
 };

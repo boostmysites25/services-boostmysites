@@ -64,6 +64,41 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/e131830c-60b5-43b1-997a-e8d892c5764e) and click on Share -> Publish.
 
+## Environment Configuration
+
+### Production URL Setup
+
+The link generator automatically detects the environment and generates appropriate URLs:
+
+**Development (localhost):**
+- Automatically detects `localhost` or `127.0.0.1`
+- Generates: `http://localhost:8080/[salesperson]/[service]`
+
+**Production:**
+- Automatically detects production environment
+- Generates: `https://services.boostmysites.in/[salesperson]/[service]`
+
+### Custom Production URL
+
+To use a different production URL, set the environment variable:
+
+```bash
+VITE_PRODUCTION_URL=https://your-domain.com
+```
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# Production URL Configuration
+VITE_PRODUCTION_URL=https://services.boostmysites.in
+
+# Other environment variables
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!

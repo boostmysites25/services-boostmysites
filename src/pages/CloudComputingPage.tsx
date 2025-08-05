@@ -1,16 +1,53 @@
 import { Cloud, Shield, Zap, Globe, Database, Settings } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
+import DynamicContactForm from '@/components/DynamicContactForm';
 
-const CloudComputingPage = () => {
+interface CloudComputingPageProps {
+  salespersonData?: any;
+  salesperson?: any;
+  service?: any;
+  salespersonEmail?: string;
+}
+
+const CloudComputingPage = ({
+  salespersonData,
+  salesperson,
+  service,
+  salespersonEmail,
+}: CloudComputingPageProps) => {
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate('/contact#form');
+    const handleGetStarted = () => {
+    // Scroll to the nearest contact form
+    const contactForms = document.querySelectorAll('section');
+    let nearestForm = null;
+    let minDistance = Infinity;
+    
+    contactForms.forEach((section) => {
+      const hasContactForm = section.querySelector('form') || 
+                           section.textContent.includes('Get in Touch') ||
+                           section.textContent.includes('Contact');
+      
+      if (hasContactForm) {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestForm = section;
+        }
+      }
+    });
+    
+    if (nearestForm) {
+      nearestForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback: scroll to bottom where contact form usually is
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
   };
 
   const features = [
@@ -128,7 +165,6 @@ const CloudComputingPage = () => {
         backgroundAttachment: 'fixed'
       }}
     >
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 relative overflow-hidden">
@@ -136,7 +172,7 @@ const CloudComputingPage = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-center">
-              <span className="bg-gradient-to-r from-blue-300 via-cyan-500 via-blue-400 to-cyan-400 bg-clip-text text-transparent inline-block animate-gradient bg-[length:400%_100%] typewriter">
+              <span className="bg-gradient-to-r from-indigo-300 to-indigo-400 bg-clip-text text-transparent inline-block animate-gradient bg-[length:400%_100%] typewriter">
                 Cloud Computing
               </span>
             </h1>
@@ -146,13 +182,13 @@ const CloudComputingPage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={handleGetStarted}
-                className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl font-semibold hover:from-blue-400 hover:to-cyan-500 transition-all duration-300 transform hover:scale-105"
+                className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl font-semibold hover:from-indigo-400 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105"
               >
                 Start Migration
               </button>
               <Link 
                 to="/portfolio"
-                className="px-8 py-4 border border-blue-400/30 rounded-xl font-semibold hover:bg-blue-500/10 transition-all duration-300 inline-flex items-center justify-center"
+                className="px-8 py-4 border border-indigo-400/30 rounded-xl font-semibold hover:bg-indigo-500/10 transition-all duration-300 inline-flex items-center justify-center"
               >
                 View Case Studies
               </Link>
@@ -165,29 +201,38 @@ const CloudComputingPage = () => {
       <ServicePortfolioSection 
         serviceId="cloud-computing" 
         serviceName="Cloud Computing"
-        accentColor="blue"
+        accentColor="indigo"
       />
 
       {/* Case Studies Section */}
       <ServiceCaseStudiesSection 
         serviceName="Cloud Computing"
         caseStudies={caseStudies}
-        accentColor="text-blue-400"
+        accentColor="text-indigo-400"
+      />
+      
+      {/* Dynamic Contact Form - injected after Success Stories if URL parameters exist */}
+      <DynamicContactForm 
+        position="after-success-stories" 
+        accentColor="indigo"
+        backgroundColor="transparent"
       />
 
       {/* Features Section */}
-      <section className="py-20 bg-black/80 border-t border-blue-400/40">
+      <section className="py-20 bg-black/80">
+        {/* Blue separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-indigo-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-blue-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Cloud Excellence</h2>
+            <h2 className="text-4xl font-bold mb-4 text-indigo-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Cloud Excellence</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Comprehensive cloud services to power your digital transformation.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="p-8 rounded-2xl bg-gray-800/50 border border-gray-700/50 hover:border-blue-400/50 transition-all duration-300">
-                <feature.icon className="h-12 w-12 text-blue-400 mb-6" />
+              <div key={index} className="p-8 rounded-2xl bg-gray-800/50 border border-gray-700/50 hover:border-indigo-400/50 transition-all duration-300">
+                <feature.icon className="h-12 w-12 text-indigo-400 mb-6" />
                 <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
                 <p className="text-gray-400 leading-relaxed">{feature.description}</p>
               </div>
@@ -197,10 +242,12 @@ const CloudComputingPage = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-black/80 border-t border-blue-400/40">
+      <section className="py-20 bg-black/80">
+        {/* Blue separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-indigo-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-blue-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Our Cloud Migration Process</h2>
+            <h2 className="text-4xl font-bold mb-4 text-indigo-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Our Cloud Migration Process</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               A proven methodology ensuring smooth cloud transition.
             </p>
@@ -208,7 +255,7 @@ const CloudComputingPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {process.map((item, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-cyan-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
                   {item.step}
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
@@ -223,28 +270,34 @@ const CloudComputingPage = () => {
       <ServicePricingSection 
         serviceName="Cloud Computing"
         pricingTiers={pricingTiers}
-        accentColor="text-blue-400"
-        buttonAccentColor="blue"
+        accentColor="text-indigo-400"
+        buttonAccentColor="indigo"
       />
-
+      
+      {/* Separator after Pricing */}
+      <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-indigo-300 to-transparent"></div>
+      
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 relative">
+      <section className="py-20 bg-gradient-to-r from-indigo-500/20 to-indigo-500/20 relative">
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
-          <h2 className="text-4xl font-bold mb-4 text-blue-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Ready to Migrate to the Cloud?</h2>
+          <h2 className="text-4xl font-bold mb-4 text-indigo-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Ready to Migrate to the Cloud?</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Transform your infrastructure with our expert cloud computing services.
           </p>
           <button 
             onClick={handleGetStarted}
-            className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl font-semibold hover:from-blue-400 hover:to-cyan-500 transition-all duration-300 transform hover:scale-105"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl font-semibold hover:from-indigo-400 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105"
           >
             Get Started Today
           </button>
         </div>
-      </section>
-
-      <Footer />
+      </section>{/* Dynamic Contact Form - also available at bottom */}
+      <DynamicContactForm 
+        position="bottom" 
+        accentColor="indigo"
+        backgroundColor="transparent"
+      />
     </div>
   );
 };

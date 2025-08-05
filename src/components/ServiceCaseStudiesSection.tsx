@@ -39,7 +39,10 @@ const ServiceCaseStudiesSection = ({ serviceName, caseStudies, accentColor = "te
     return colorMap[colorName] || accent;
   };
   return (
-    <section className={`py-20 bg-black/80 border-t ${accentColor?.includes('pink') ? 'border-pink-400/40' : accentColor?.includes('blue') ? 'border-blue-400/40' : accentColor?.includes('green') ? 'border-green-400/40' : accentColor?.includes('purple') ? 'border-purple-400/40' : accentColor?.includes('yellow') ? 'border-yellow-400/40' : accentColor?.includes('red') ? 'border-red-400/40' : accentColor?.includes('orange') ? 'border-orange-400/10' : accentColor?.includes('indigo') ? 'border-indigo-400/40' : accentColor?.includes('teal') ? 'border-teal-400/40' : 'border-gray-400/10'}`}>
+    <section className="py-20 bg-black/80">
+      {/* Separator line */}
+      <div className={`w-full h-0.5 bg-gradient-to-r from-transparent ${accentColor?.includes('pink') ? 'via-pink-300' : accentColor?.includes('blue') ? 'via-blue-300' : accentColor?.includes('green') ? 'via-green-300' : accentColor?.includes('purple') ? 'via-purple-300' : accentColor?.includes('yellow') ? 'via-yellow-300' : accentColor?.includes('red') ? 'via-red-300' : accentColor?.includes('orange') ? 'via-orange-300' : accentColor?.includes('indigo') ? 'via-indigo-300' : accentColor?.includes('teal') ? 'via-teal-300' : 'via-gray-300'} to-transparent mb-8`}></div>
+      
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className={`text-4xl font-bold mb-4 ${getHeadingColorClass(accentColor)}`}>Success Stories</h2>

@@ -43,6 +43,7 @@ interface SalespersonContactFormProps {
   salespersonEmail?: string;
   onSuccess?: () => void;
   className?: string;
+  accentColor?: string;
 }
 
 const SalespersonContactForm = ({
@@ -51,6 +52,7 @@ const SalespersonContactForm = ({
   sourcePage = "sales-service",
   salespersonEmail,
   className = "",
+  accentColor = "blue",
 }: SalespersonContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -67,6 +69,91 @@ const SalespersonContactForm = ({
       message: "",
     },
   });
+
+  // Get styling based on accent color
+  const getAccentStyling = (color: string) => {
+    switch (color) {
+      case 'yellow':
+        return {
+          focusBorder: 'focus:border-yellow-400',
+          focusRing: 'focus:ring-yellow-400/20',
+          buttonGradient: 'from-yellow-500 to-orange-600',
+          buttonHover: 'hover:from-yellow-400 hover:to-orange-500'
+        };
+      case 'blue':
+        return {
+          focusBorder: 'focus:border-cyan-400',
+          focusRing: 'focus:ring-cyan-400/20',
+          buttonGradient: 'from-cyan-500 to-blue-600',
+          buttonHover: 'hover:from-cyan-400 hover:to-blue-500'
+        };
+      case 'green':
+        return {
+          focusBorder: 'focus:border-green-400',
+          focusRing: 'focus:ring-green-400/20',
+          buttonGradient: 'bg-green-500',
+          buttonHover: 'hover:bg-green-600'
+        };
+      case 'purple':
+        return {
+          focusBorder: 'focus:border-purple-400',
+          focusRing: 'focus:ring-purple-400/20',
+          buttonGradient: 'bg-purple-500',
+          buttonHover: 'hover:bg-purple-600'
+        };
+      case 'teal':
+        return {
+          focusBorder: 'focus:border-teal-400',
+          focusRing: 'focus:ring-teal-400/20',
+          buttonGradient: 'from-teal-500 to-cyan-600',
+          buttonHover: 'hover:from-teal-400 hover:to-cyan-500'
+        };
+      case 'pink':
+        return {
+          focusBorder: 'focus:border-pink-400',
+          focusRing: 'focus:ring-pink-400/20',
+          buttonGradient: 'bg-pink-500',
+          buttonHover: 'hover:bg-pink-600'
+        };
+      case 'indigo':
+        return {
+          focusBorder: 'focus:border-indigo-400',
+          focusRing: 'focus:ring-indigo-400/20',
+          buttonGradient: 'bg-indigo-500',
+          buttonHover: 'hover:bg-indigo-600'
+        };
+      case 'teal':
+        return {
+          focusBorder: 'focus:border-teal-400',
+          focusRing: 'focus:ring-teal-400/20',
+          buttonGradient: 'bg-teal-500',
+          buttonHover: 'hover:bg-teal-600'
+        };
+      case 'orange':
+        return {
+          focusBorder: 'focus:border-orange-400',
+          focusRing: 'focus:ring-orange-400/20',
+          buttonGradient: 'bg-orange-500',
+          buttonHover: 'hover:bg-orange-600'
+        };
+      case 'red':
+        return {
+          focusBorder: 'focus:border-red-400',
+          focusRing: 'focus:ring-red-400/20',
+          buttonGradient: 'from-red-500 to-pink-600',
+          buttonHover: 'hover:from-red-400 hover:to-pink-500'
+        };
+      default:
+        return {
+          focusBorder: 'focus:border-cyan-400',
+          focusRing: 'focus:ring-cyan-400/20',
+          buttonGradient: 'from-cyan-500 to-blue-600',
+          buttonHover: 'hover:from-cyan-400 hover:to-blue-500'
+        };
+    }
+  };
+
+  const styling = getAccentStyling(accentColor);
 
   const onSubmit = async (data: SalespersonFormData) => {
     setIsSubmitting(true);
@@ -167,7 +254,7 @@ const SalespersonContactForm = ({
                     <FormControl>
                       <Input
                         placeholder="Enter your full name"
-                        className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-cyan-400 focus:ring-cyan-400/20 transition-all duration-300"
+                        className={`bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 ${styling.focusBorder} ${styling.focusRing} transition-all duration-300`}
                         {...field}
                       />
                     </FormControl>
@@ -189,7 +276,7 @@ const SalespersonContactForm = ({
                       <Input
                         type="email"
                         placeholder="Enter your email address"
-                        className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-cyan-400 focus:ring-cyan-400/20 transition-all duration-300"
+                        className={`bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 ${styling.focusBorder} ${styling.focusRing} transition-all duration-300`}
                         {...field}
                       />
                     </FormControl>
@@ -213,7 +300,7 @@ const SalespersonContactForm = ({
                       <Input
                         type="tel"
                         placeholder="Enter your phone number"
-                        className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-cyan-400 focus:ring-cyan-400/20 transition-all duration-300"
+                        className={`bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 ${styling.focusBorder} ${styling.focusRing} transition-all duration-300`}
                         {...field}
                       />
                     </FormControl>
@@ -234,7 +321,7 @@ const SalespersonContactForm = ({
                     <FormControl>
                       <Input
                         placeholder="What's this about?"
-                        className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-cyan-400 focus:ring-cyan-400/20 transition-all duration-300"
+                        className={`bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 ${styling.focusBorder} ${styling.focusRing} transition-all duration-300`}
                         {...field}
                       />
                     </FormControl>
@@ -256,7 +343,7 @@ const SalespersonContactForm = ({
                   <FormControl>
                     <Textarea
                       placeholder="Tell us about your project, requirements, or any questions you have..."
-                      className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-cyan-400 focus:ring-cyan-400/20 transition-all duration-300 min-h-[140px] resize-none"
+                      className={`bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 ${styling.focusBorder} ${styling.focusRing} transition-all duration-300 min-h-[140px] resize-none`}
                       {...field}
                     />
                   </FormControl>
@@ -268,7 +355,7 @@ const SalespersonContactForm = ({
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-4 text-lg hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 font-semibold shadow-lg hover:shadow-cyan-500/25 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none rounded-xl"
+              className={`w-full ${styling.buttonGradient} text-white py-4 text-lg ${styling.buttonHover} transition-all duration-300 font-semibold shadow-lg hover:shadow-${accentColor}-500/25 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none rounded-xl`}
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">

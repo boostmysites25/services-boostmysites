@@ -20,13 +20,13 @@ export const SalespersonList: React.FC<SalespersonListProps> = ({
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const handleCopyLink = (url: string) => {
-    navigator.clipboard.writeText(`https://${url}`);
+    navigator.clipboard.writeText(url);
     toast.success('Link copied to clipboard!');
   };
 
   const handleCopyAllLinks = (salesperson: SalespersonLink) => {
     const links = salespersonLinkService.generateLinks(salesperson);
-    const allLinks = links.map(link => `${link.serviceName}: https://${link.url}`).join('\n');
+    const allLinks = links.map(link => `${link.serviceName}: ${link.url}`).join('\n');
     navigator.clipboard.writeText(allLinks);
     toast.success('All links copied to clipboard!');
   };
@@ -115,7 +115,7 @@ export const SalespersonList: React.FC<SalespersonListProps> = ({
                     <div>
                       <span className="font-medium">{link.serviceName}</span>
                       <p className="text-sm text-muted-foreground">
-                        https://{link.url}
+                        {link.url}
                       </p>
                     </div>
                     <div className="flex gap-1">
@@ -129,7 +129,7 @@ export const SalespersonList: React.FC<SalespersonListProps> = ({
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => window.open(`https://${link.url}`, '_blank')}
+                        onClick={() => window.open(link.url, '_blank')}
                       >
                         <ExternalLink className="h-4 w-4" />
                       </Button>

@@ -1,16 +1,53 @@
 import { MessageCircle, Brain, Zap, Users, Settings, Bot } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
+import DynamicContactForm from '@/components/DynamicContactForm';
 
-const ChatbotDevelopmentPage = () => {
+interface ChatbotDevelopmentPageProps {
+  salespersonData?: any;
+  salesperson?: any;
+  service?: any;
+  salespersonEmail?: string;
+}
+
+const ChatbotDevelopmentPage = ({
+  salespersonData,
+  salesperson,
+  service,
+  salespersonEmail,
+}: ChatbotDevelopmentPageProps) => {
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate('/contact#form');
+    const handleGetStarted = () => {
+    // Scroll to the nearest contact form
+    const contactForms = document.querySelectorAll('section');
+    let nearestForm = null;
+    let minDistance = Infinity;
+    
+    contactForms.forEach((section) => {
+      const hasContactForm = section.querySelector('form') || 
+                           section.textContent.includes('Get in Touch') ||
+                           section.textContent.includes('Contact');
+      
+      if (hasContactForm) {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestForm = section;
+        }
+      }
+    });
+    
+    if (nearestForm) {
+      nearestForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback: scroll to bottom where contact form usually is
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
   };
 
   const features = [
@@ -143,7 +180,6 @@ const ChatbotDevelopmentPage = () => {
         backgroundAttachment: 'fixed'
       }}
     >
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 relative overflow-hidden">
@@ -161,7 +197,7 @@ const ChatbotDevelopmentPage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={handleGetStarted}
-                className="px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-semibold hover:from-teal-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105"
+                className="px-8 py-4 bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl font-semibold hover:from-teal-400 hover:to-teal-500 transition-all duration-300 transform hover:scale-105"
               >
                 Build Your Chatbot
               </button>
@@ -189,9 +225,18 @@ const ChatbotDevelopmentPage = () => {
         caseStudies={caseStudies}
         accentColor="text-teal-400"
       />
+      
+      {/* Dynamic Contact Form - injected after Success Stories if URL parameters exist */}
+      <DynamicContactForm 
+        position="after-success-stories" 
+        accentColor="teal"
+        backgroundColor="transparent"
+      />
 
       {/* Features Section */}
-      <section className="py-20 bg-black/80 border-t border-teal-400/40">
+      <section className="py-20 bg-black/80">
+        {/* Blue separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-teal-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-teal-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Intelligent Chatbot Features</h2>
@@ -212,7 +257,9 @@ const ChatbotDevelopmentPage = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-black/80 border-t border-teal-400/40">
+      <section className="py-20 bg-black/80">
+        {/* Blue separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-teal-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-teal-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Our Chatbot Development Process</h2>
@@ -223,7 +270,7 @@ const ChatbotDevelopmentPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {process.map((item, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-blue-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
                   {item.step}
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
@@ -241,9 +288,12 @@ const ChatbotDevelopmentPage = () => {
         accentColor="text-teal-400"
         buttonAccentColor="teal"
       />
-
+      
+      {/* Separator after Pricing */}
+      <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-teal-300 to-transparent"></div>
+      
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-500/20 to-blue-500/20 relative">
+      <section className="py-20 bg-gradient-to-r from-teal-500/20 to-teal-500/20 relative">
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
           <h2 className="text-4xl font-bold mb-4 text-teal-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Ready to Automate Customer Support?</h2>
@@ -252,14 +302,19 @@ const ChatbotDevelopmentPage = () => {
           </p>
           <button 
             onClick={handleGetStarted}
-            className="inline-block px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-semibold hover:from-teal-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl font-semibold hover:from-teal-400 hover:to-teal-500 transition-all duration-300 transform hover:scale-105"
           >
             Get Started Today
           </button>
         </div>
       </section>
 
-      <Footer />
+      {/* Dynamic Contact Form - handles both regular and salesperson scenarios */}
+      <DynamicContactForm 
+        position="bottom" 
+        accentColor="teal"
+        backgroundColor="transparent"
+      />
     </div>
   );
 };

@@ -1,16 +1,53 @@
 import { Brain, Bot, Eye, Mic, BarChart3, Zap } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
+import DynamicContactForm from '@/components/DynamicContactForm';
 
-const AiDevelopmentPage = () => {
+interface AiDevelopmentPageProps {
+  salespersonData?: any;
+  salesperson?: any;
+  service?: any;
+  salespersonEmail?: string;
+}
+
+const AiDevelopmentPage = ({
+  salespersonData,
+  salesperson,
+  service,
+  salespersonEmail,
+}: AiDevelopmentPageProps) => {
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate('/contact#form');
+    const handleGetStarted = () => {
+    // Scroll to the nearest contact form
+    const contactForms = document.querySelectorAll('section');
+    let nearestForm = null;
+    let minDistance = Infinity;
+    
+    contactForms.forEach((section) => {
+      const hasContactForm = section.querySelector('form') || 
+                           section.textContent.includes('Get in Touch') ||
+                           section.textContent.includes('Contact');
+      
+      if (hasContactForm) {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestForm = section;
+        }
+      }
+    });
+    
+    if (nearestForm) {
+      nearestForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback: scroll to bottom where contact form usually is
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
   };
 
   const features = [
@@ -128,7 +165,6 @@ const AiDevelopmentPage = () => {
         backgroundAttachment: 'fixed'
       }}
     >
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 relative overflow-hidden">
@@ -146,7 +182,7 @@ const AiDevelopmentPage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={handleGetStarted}
-                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl font-semibold hover:from-purple-400 hover:to-pink-500 transition-all duration-300 transform hover:scale-105"
+                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl font-semibold hover:from-purple-400 hover:to-purple-500 transition-all duration-300 transform hover:scale-105"
               >
                 Start AI Project
               </button>
@@ -174,9 +210,18 @@ const AiDevelopmentPage = () => {
         caseStudies={caseStudies}
         accentColor="text-purple-400"
       />
+      
+      {/* Dynamic Contact Form - injected after Success Stories if URL parameters exist */}
+      <DynamicContactForm 
+        position="after-success-stories" 
+        accentColor="purple"
+        backgroundColor="transparent"
+      />
 
       {/* Features Section */}
-      <section className="py-20 bg-black/80 border-t border-purple-400/40">
+      <section className="py-20 bg-black/80">
+        {/* Purple separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-purple-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">AI Capabilities</h2>
@@ -197,7 +242,9 @@ const AiDevelopmentPage = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-black/80 border-t border-purple-400/40">
+      <section className="py-20 bg-black/80">
+        {/* Purple separator line */}
+        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-8"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-purple-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Our AI Development Process</h2>
@@ -208,7 +255,7 @@ const AiDevelopmentPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {process.map((item, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
                   {item.step}
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
@@ -227,8 +274,11 @@ const AiDevelopmentPage = () => {
         buttonAccentColor="purple"
       />
 
+      {/* Separator after Pricing */}
+      <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-purple-300 to-transparent"></div>
+
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-500/20 to-pink-500/20 relative">
+      <section className="py-20 bg-gradient-to-r from-purple-500/20 to-purple-500/20 relative">
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
           <h2 className="text-4xl font-bold mb-4 text-purple-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Ready to Embrace AI Innovation?</h2>
@@ -237,14 +287,19 @@ const AiDevelopmentPage = () => {
           </p>
           <button 
             onClick={handleGetStarted}
-            className="inline-block px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl font-semibold hover:from-purple-400 hover:to-pink-500 transition-all duration-300 transform hover:scale-105"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl font-semibold hover:from-purple-400 hover:to-purple-500 transition-all duration-300 transform hover:scale-105"
           >
             Get Started Today
           </button>
         </div>
       </section>
 
-      <Footer />
+      {/* Dynamic Contact Form - handles both regular and salesperson scenarios */}
+      <DynamicContactForm 
+        position="bottom" 
+        accentColor="purple"
+        backgroundColor="transparent"
+      />
     </div>
   );
 };
