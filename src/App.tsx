@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -51,15 +50,15 @@ const queryClient = new QueryClient();
 // Google Analytics tracker component
 const GoogleAnalyticsTracker = () => {
   const location = useLocation();
-  
+
   useEffect(() => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('config', 'AW-10794572231', {
-        page_path: location.pathname + location.search
+    if (typeof window.gtag === "function") {
+      window.gtag("config", "AW-10794572231", {
+        page_path: location.pathname + location.search,
       });
     }
   }, [location]);
-  
+
   return null;
 };
 
@@ -74,59 +73,137 @@ const App = () => (
           {/* Public routes */}
           <Route path="/" element={<Index />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          
+
           {/* Case study routes - supports both slug-based and ID-based URLs */}
           <Route path="/case-study/:slug" element={<CaseStudy />} />
-          
+
           {/* Blog routes */}
           <Route path="/blogs" element={<BlogsPage />} />
           {/* Blog post routes - supports both slug-based and ID-based URLs */}
           <Route path="/blog/:slug" element={<BlogPostPage />} />
-          
+
           {/* Service landing pages */}
           <Route path="/web-apps" element={<WebAppsPage />} />
           <Route path="/mobile-apps" element={<MobileAppsPage />} />
           <Route path="/saas" element={<SaasPage />} />
           <Route path="/ai-automation" element={<AiAutomationPage />} />
           <Route path="/ai-calling" element={<AiCallingPage />} />
-          
+
           {/* Additional service pages */}
           <Route path="/ai-development" element={<AiDevelopmentPage />} />
-          <Route path="/blockchain-development" element={<BlockchainDevelopmentPage />} />
+          <Route
+            path="/blockchain-development"
+            element={<BlockchainDevelopmentPage />}
+          />
           <Route path="/ar-vr-development" element={<ArVrDevelopmentPage />} />
-          <Route path="/chatbot-development" element={<ChatbotDevelopmentPage />} />
+          <Route
+            path="/chatbot-development"
+            element={<ChatbotDevelopmentPage />}
+          />
           <Route path="/cloud-computing" element={<CloudComputingPage />} />
           <Route path="/data-analytics" element={<DataAnalyticsPage />} />
           <Route path="/game-development" element={<GameDevelopmentPage />} />
           <Route path="/iot-development" element={<IotDevelopmentPage />} />
           <Route path="/ux-ui-design" element={<UxuiDesignPage />} />
-          
+
           {/* Other pages */}
           <Route path="/reviews" element={<ReviewsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          
+
           {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-          <Route path="/admin/customer-inquiries" element={<ProtectedRoute><CustomerInquiries /></ProtectedRoute>} />
-          <Route path="/admin/portfolio" element={<ProtectedRoute><PortfolioList /></ProtectedRoute>} />
-          <Route path="/admin/portfolio/new" element={<ProtectedRoute><PortfolioForm /></ProtectedRoute>} />
-          <Route path="/admin/portfolio/edit/:id" element={<ProtectedRoute><PortfolioForm /></ProtectedRoute>} />
-          <Route path="/admin/case-studies" element={<ProtectedRoute><CaseStudyList /></ProtectedRoute>} />
-          <Route path="/admin/blogs" element={<ProtectedRoute><BlogList /></ProtectedRoute>} />
-          <Route path="/admin/blogs/new" element={<ProtectedRoute><BlogForm /></ProtectedRoute>} />
-          <Route path="/admin/blogs/edit/:id" element={<ProtectedRoute><BlogForm /></ProtectedRoute>} />
-          <Route path="/admin/link-generator" element={<ProtectedRoute><LinkGenerator /></ProtectedRoute>} />
-          
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/customer-inquiries"
+            element={
+              <ProtectedRoute>
+                <CustomerInquiries />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/portfolio"
+            element={
+              <ProtectedRoute>
+                <PortfolioList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/portfolio/new"
+            element={
+              <ProtectedRoute>
+                <PortfolioForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/portfolio/edit/:id"
+            element={
+              <ProtectedRoute>
+                <PortfolioForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/case-studies"
+            element={
+              <ProtectedRoute>
+                <CaseStudyList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/blogs"
+            element={
+              <ProtectedRoute>
+                <BlogList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/blogs/new"
+            element={
+              <ProtectedRoute>
+                <BlogForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/blogs/edit/:id"
+            element={
+              <ProtectedRoute>
+                <BlogForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/link-generator"
+            element={
+              <ProtectedRoute>
+                <LinkGenerator />
+              </ProtectedRoute>
+            }
+          />
+
           {/* Dynamic salesperson service routes */}
-          <Route path="/:salesperson/:service" element={<SalespersonServicePage />} />
-          
+          <Route
+            path="/:salesperson/:service"
+            element={<SalespersonServicePage />}
+          />
+
           {/* 404 page */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -95,29 +95,47 @@ const DataAnalyticsPage = ({
     {
       client: "FinanceFlow Corp",
       industry: "Financial Services",
-      challenge: "Fragmented data across multiple systems with no unified reporting, making business decisions slow and unreliable.",
-      solution: "Built comprehensive data warehouse with real-time ETL pipelines and interactive BI dashboards for unified reporting.",
-      results: ["95% faster reporting", "60% better decision accuracy", "Single source of truth", "Real-time insights"],
-      testimonial: "The analytics platform transformed how we make decisions. We now have real-time insights that drive our strategy and have significantly improved our operational efficiency.",
+      challenge:
+        "Fragmented data across multiple systems with no unified reporting, making business decisions slow and unreliable.",
+      solution:
+        "Built comprehensive data warehouse with real-time ETL pipelines and interactive BI dashboards for unified reporting.",
+      results: [
+        "95% faster reporting",
+        "60% better decision accuracy",
+        "Single source of truth",
+        "Real-time insights",
+      ],
+      testimonial:
+        "The analytics platform transformed how we make decisions. We now have real-time insights that drive our strategy and have significantly improved our operational efficiency.",
       clientName: "Robert Martinez",
       clientRole: "Chief Data Officer",
-      clientImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      clientImage:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       duration: "12 weeks",
-      teamSize: "6 specialists"
+      teamSize: "6 specialists",
     },
     {
       client: "RetailMetrics Inc",
       industry: "Retail & E-commerce",
-      challenge: "No visibility into customer behavior patterns and inventory optimization, leading to overstocking and lost sales.",
-      solution: "Implemented predictive analytics with customer segmentation and inventory optimization algorithms using machine learning.",
-      results: ["40% reduction in inventory costs", "25% increase in sales", "Customer retention improved", "Automated forecasting"],
-      testimonial: "The predictive analytics solution has revolutionized our inventory management. We can now anticipate demand and optimize our stock levels automatically.",
+      challenge:
+        "No visibility into customer behavior patterns and inventory optimization, leading to overstocking and lost sales.",
+      solution:
+        "Implemented predictive analytics with customer segmentation and inventory optimization algorithms using machine learning.",
+      results: [
+        "40% reduction in inventory costs",
+        "25% increase in sales",
+        "Customer retention improved",
+        "Automated forecasting",
+      ],
+      testimonial:
+        "The predictive analytics solution has revolutionized our inventory management. We can now anticipate demand and optimize our stock levels automatically.",
       clientName: "Lisa Thompson",
       clientRole: "VP of Operations",
-      clientImage: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      clientImage:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80",
       duration: "16 weeks",
-      teamSize: "8 specialists"
-    }
+      teamSize: "8 specialists",
+    },
   ];
 
   const pricingTiers = [

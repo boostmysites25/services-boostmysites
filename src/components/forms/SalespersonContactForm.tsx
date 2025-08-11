@@ -73,82 +73,82 @@ const SalespersonContactForm = ({
   // Get styling based on accent color
   const getAccentStyling = (color: string) => {
     switch (color) {
-      case 'yellow':
+      case "yellow":
         return {
-          focusBorder: 'focus:border-yellow-400',
-          focusRing: 'focus:ring-yellow-400/20',
-          buttonGradient: 'from-yellow-500 to-orange-600',
-          buttonHover: 'hover:from-yellow-400 hover:to-orange-500'
+          focusBorder: "focus:border-yellow-400",
+          focusRing: "focus:ring-yellow-400/20",
+          buttonGradient: "from-yellow-500 to-orange-600",
+          buttonHover: "hover:from-yellow-400 hover:to-orange-500",
         };
-      case 'blue':
+      case "blue":
         return {
-          focusBorder: 'focus:border-cyan-400',
-          focusRing: 'focus:ring-cyan-400/20',
-          buttonGradient: 'from-cyan-500 to-blue-600',
-          buttonHover: 'hover:from-cyan-400 hover:to-blue-500'
+          focusBorder: "focus:border-cyan-400",
+          focusRing: "focus:ring-cyan-400/20",
+          buttonGradient: "from-cyan-500 to-blue-600",
+          buttonHover: "hover:from-cyan-400 hover:to-blue-500",
         };
-      case 'green':
+      case "green":
         return {
-          focusBorder: 'focus:border-green-400',
-          focusRing: 'focus:ring-green-400/20',
-          buttonGradient: 'bg-green-500',
-          buttonHover: 'hover:bg-green-600'
+          focusBorder: "focus:border-green-400",
+          focusRing: "focus:ring-green-400/20",
+          buttonGradient: "bg-green-500",
+          buttonHover: "hover:bg-green-600",
         };
-      case 'purple':
+      case "purple":
         return {
-          focusBorder: 'focus:border-purple-400',
-          focusRing: 'focus:ring-purple-400/20',
-          buttonGradient: 'bg-purple-500',
-          buttonHover: 'hover:bg-purple-600'
+          focusBorder: "focus:border-purple-400",
+          focusRing: "focus:ring-purple-400/20",
+          buttonGradient: "bg-purple-500",
+          buttonHover: "hover:bg-purple-600",
         };
-      case 'teal':
+      case "teal":
         return {
-          focusBorder: 'focus:border-teal-400',
-          focusRing: 'focus:ring-teal-400/20',
-          buttonGradient: 'from-teal-500 to-cyan-600',
-          buttonHover: 'hover:from-teal-400 hover:to-cyan-500'
+          focusBorder: "focus:border-teal-400",
+          focusRing: "focus:ring-teal-400/20",
+          buttonGradient: "from-teal-500 to-cyan-600",
+          buttonHover: "hover:from-teal-400 hover:to-cyan-500",
         };
-      case 'pink':
+      case "pink":
         return {
-          focusBorder: 'focus:border-pink-400',
-          focusRing: 'focus:ring-pink-400/20',
-          buttonGradient: 'bg-pink-500',
-          buttonHover: 'hover:bg-pink-600'
+          focusBorder: "focus:border-pink-400",
+          focusRing: "focus:ring-pink-400/20",
+          buttonGradient: "bg-pink-500",
+          buttonHover: "hover:bg-pink-600",
         };
-      case 'indigo':
+      case "indigo":
         return {
-          focusBorder: 'focus:border-indigo-400',
-          focusRing: 'focus:ring-indigo-400/20',
-          buttonGradient: 'bg-indigo-500',
-          buttonHover: 'hover:bg-indigo-600'
+          focusBorder: "focus:border-indigo-400",
+          focusRing: "focus:ring-indigo-400/20",
+          buttonGradient: "bg-indigo-500",
+          buttonHover: "hover:bg-indigo-600",
         };
-      case 'teal':
+      case "teal":
         return {
-          focusBorder: 'focus:border-teal-400',
-          focusRing: 'focus:ring-teal-400/20',
-          buttonGradient: 'bg-teal-500',
-          buttonHover: 'hover:bg-teal-600'
+          focusBorder: "focus:border-teal-400",
+          focusRing: "focus:ring-teal-400/20",
+          buttonGradient: "bg-teal-500",
+          buttonHover: "hover:bg-teal-600",
         };
-      case 'orange':
+      case "orange":
         return {
-          focusBorder: 'focus:border-orange-400',
-          focusRing: 'focus:ring-orange-400/20',
-          buttonGradient: 'bg-orange-500',
-          buttonHover: 'hover:bg-orange-600'
+          focusBorder: "focus:border-orange-400",
+          focusRing: "focus:ring-orange-400/20",
+          buttonGradient: "bg-orange-500",
+          buttonHover: "hover:bg-orange-600",
         };
-      case 'red':
+      case "red":
         return {
-          focusBorder: 'focus:border-red-400',
-          focusRing: 'focus:ring-red-400/20',
-          buttonGradient: 'from-red-500 to-pink-600',
-          buttonHover: 'hover:from-red-400 hover:to-pink-500'
+          focusBorder: "focus:border-red-400",
+          focusRing: "focus:ring-red-400/20",
+          buttonGradient: "from-red-500 to-pink-600",
+          buttonHover: "hover:from-red-400 hover:to-pink-500",
         };
       default:
         return {
-          focusBorder: 'focus:border-cyan-400',
-          focusRing: 'focus:ring-cyan-400/20',
-          buttonGradient: 'from-cyan-500 to-blue-600',
-          buttonHover: 'hover:from-cyan-400 hover:to-blue-500'
+          focusBorder: "focus:border-cyan-400",
+          focusRing: "focus:ring-cyan-400/20",
+          buttonGradient: "from-cyan-500 to-blue-600",
+          buttonHover: "hover:from-cyan-400 hover:to-blue-500",
         };
     }
   };
@@ -175,14 +175,17 @@ const SalespersonContactForm = ({
       "Service : " +
       serviceName +
       "\n\n" +
-      "Message : " +
+      "Message : \n" +
       data.message;
     const payload = {
       body,
       name: "Form Submission",
       subject: data.subject,
-      to: salespersonEmail,
+      to: 'mpranavprem@gmail.com',
+      // to: salespersonEmail,
     };
+
+    console.log(salespersonEmail)
 
     try {
       const res = await axios.post(
@@ -222,16 +225,6 @@ const SalespersonContactForm = ({
   return (
     <div id="contact" className={`max-w-2xl mx-auto ${className}`}>
       <div className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 shadow-2xl">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-4">
-            Get in Touch
-          </h2>
-          <p className="text-gray-300 text-lg">
-            Ready to start your project? Fill out the form below and{" "}
-            {salespersonName} will get back to you within 24 hours.
-          </p>
-        </div>
-
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {submitError && (

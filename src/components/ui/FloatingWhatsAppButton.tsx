@@ -1,14 +1,25 @@
+import { MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { formatPhoneForWhatsApp } from "@/lib/utils";
 
-import { MessageCircle } from 'lucide-react';
-import { useState } from 'react';
+interface FloatingWhatsAppButtonProps {
+  phoneNumber?: string;
+  message?: string;
+}
 
-const FloatingWhatsAppButton = () => {
+const FloatingWhatsAppButton = ({
+  phoneNumber,
+}: FloatingWhatsAppButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  
-  // WhatsApp configuration
-  const whatsappNumber = '919632953355';
-  const whatsappMessage = 'I would like to develop a software or app. I need to discuss with you more';
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  // If no phone number provided, don't render the button
+  if (!phoneNumber) {
+    return null;
+  }
+
+  // Format phone number for WhatsApp
+  const formattedPhone = formatPhoneForWhatsApp(phoneNumber);
+  const whatsappUrl = `https://wa.me/${formattedPhone}`;
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
@@ -24,10 +35,10 @@ const FloatingWhatsAppButton = () => {
         {/* Tooltip */}
         <div
           className={`absolute right-full mr-3 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap transition-all duration-300 transform ${
-            isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
+            isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"
           }`}
         >
-          Chat with us
+          Chat on WhatsApp
           <div className="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-900 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
         </div>
 

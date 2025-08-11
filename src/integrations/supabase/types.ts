@@ -212,6 +212,7 @@ export type Database = {
           email: string
           id: string
           is_active: boolean
+          phone: string | null
           salesperson_name: string
           services: string[]
           updated_at: string
@@ -222,6 +223,7 @@ export type Database = {
           email: string
           id?: string
           is_active?: boolean
+          phone?: string | null
           salesperson_name: string
           services?: string[]
           updated_at?: string
@@ -232,6 +234,7 @@ export type Database = {
           email?: string
           id?: string
           is_active?: boolean
+          phone?: string | null
           salesperson_name?: string
           services?: string[]
           updated_at?: string

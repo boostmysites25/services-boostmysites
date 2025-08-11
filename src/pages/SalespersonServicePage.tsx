@@ -5,6 +5,7 @@ import {
   AVAILABLE_SERVICES,
 } from "@/services/salespersonLinkService";
 import { Loader2 } from "lucide-react";
+import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
 
 // Import service page components
 import WebAppsPage from "./WebAppsPage";
@@ -238,6 +239,17 @@ const SalespersonServicePage = () => {
                 >
                   {salespersonData.salesperson.email}
                 </a>
+                {salespersonData.salesperson.phone && (
+                  <>
+                    {" • "}
+                    <a
+                      href={`tel:${salespersonData.salesperson.phone}`}
+                      className="underline hover:no-underline"
+                    >
+                      Call: {salespersonData.salesperson.phone}
+                    </a>
+                  </>
+                )}
               </p>
             </div>
           </div>
@@ -246,6 +258,9 @@ const SalespersonServicePage = () => {
 
       {/* Add top padding to account for the fixed banner */}
       <div className="pt-16">{renderServicePage()}</div>
+
+      {/* WhatsApp Button - only show if salesperson has a phone number */}
+      <FloatingWhatsAppButton phoneNumber={salespersonData.salesperson.phone} />
     </div>
   );
 };

@@ -75,7 +75,10 @@ export const SalespersonList: React.FC<SalespersonListProps> = ({
                       <Badge variant="secondary">Inactive</Badge>
                     )}
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground">{salesperson.email}</p>
+                  <div className="text-sm text-muted-foreground space-y-1">
+                    <p>{salesperson.email}</p>
+                    {salesperson.phone && <p>{salesperson.phone}</p>}
+                  </div>
                 </div>
                 <div className="flex gap-2">
                   <Button
