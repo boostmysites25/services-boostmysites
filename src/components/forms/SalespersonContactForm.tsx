@@ -181,8 +181,7 @@ const SalespersonContactForm = ({
       body,
       name: "Form Submission",
       subject: data.subject,
-      to: 'mpranavprem@gmail.com',
-      // to: salespersonEmail,
+      to: salespersonEmail,
     };
 
     console.log(salespersonEmail)
