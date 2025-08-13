@@ -13,7 +13,7 @@ import ProjectDetailsStep from './customer-inquiry/ProjectDetailsStep';
 import ProjectDescriptionStep from './customer-inquiry/ProjectDescriptionStep';
 import FormNavigation from './customer-inquiry/FormNavigation';
 
-const CustomerInquiryForm = ({ sourcePage = 'contact', onSuccess, className = '' }: CustomerInquiryFormProps) => {
+const CustomerInquiryForm = ({ sourcePage = 'contact', onSuccess, className = '', salespersonName, serviceName }: CustomerInquiryFormProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const totalSteps = 3;
@@ -70,7 +70,16 @@ const CustomerInquiryForm = ({ sourcePage = 'contact', onSuccess, className = ''
       // Redirect to thank you page after a brief delay
       setTimeout(() => {
         console.log('CustomerInquiryForm: Navigating to /thank-you');
-        navigate('/thank-you');
+        
+        // Pass salesperson information to thank you page if available
+        if (salespersonName || serviceName) {
+          const params = new URLSearchParams();
+          if (salespersonName) params.append('salesperson', salespersonName);
+          if (serviceName) params.append('service', serviceName);
+          navigate(`/thank-you?${params.toString()}`);
+        } else {
+          navigate('/thank-you');
+        }
       }, 1000);
       
     } catch (error) {

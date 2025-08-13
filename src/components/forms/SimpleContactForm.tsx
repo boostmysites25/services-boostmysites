@@ -25,9 +25,11 @@ interface SimpleContactFormProps {
   sourcePage?: string;
   onSuccess?: () => void;
   className?: string;
+  salespersonName?: string;
+  serviceName?: string;
 }
 
-const SimpleContactForm = ({ sourcePage = 'home-simple', onSuccess, className = '' }: SimpleContactFormProps) => {
+const SimpleContactForm = ({ sourcePage = 'home-simple', onSuccess, className = '', salespersonName, serviceName }: SimpleContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const { toast } = useToast();
@@ -88,7 +90,16 @@ const SimpleContactForm = ({ sourcePage = 'home-simple', onSuccess, className = 
       // Redirect to thank you page after a brief delay
       setTimeout(() => {
         console.log('SimpleContactForm: Navigating to /thank-you');
-        navigate('/thank-you');
+        
+        // Pass salesperson information to thank you page if available
+        if (salespersonName || serviceName) {
+          const params = new URLSearchParams();
+          if (salespersonName) params.append('salesperson', salespersonName);
+          if (serviceName) params.append('service', serviceName);
+          navigate(`/thank-you?${params.toString()}`);
+        } else {
+          navigate('/thank-you');
+        }
       }, 1500);
       
     } catch (error) {

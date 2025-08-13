@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 
 interface GoogleTagInjectorProps {
   salespersonData?: {
-    tag1?: string | null;
-    tag2?: string | null;
-    tag3?: string | null;
+    conversion_tag?: string | null;
+    gtag_script?: string | null;
   };
+  tagType?: 'conversion' | 'gtag' | 'both';
 }
 
-export const GoogleTagInjector: React.FC<GoogleTagInjectorProps> = ({ salespersonData }) => {
+export const GoogleTagInjector: React.FC<GoogleTagInjectorProps> = ({ salespersonData, tagType = 'both' }) => {
   useEffect(() => {
     if (!salespersonData) return;
 
-    console.log('🔍 GoogleTagInjector: Injecting tags for salesperson:', salespersonData);
+    console.log('🔍 GoogleTagInjector: Injecting tags for salesperson:', salespersonData, 'Tag type:', tagType);
 
     const injectedElements: Element[] = [];
 
@@ -62,22 +62,16 @@ export const GoogleTagInjector: React.FC<GoogleTagInjectorProps> = ({ salesperso
       }
     };
 
-    // Inject head tag (tag1)
-    if (salespersonData.tag1) {
-      console.log('🔍 GoogleTagInjector: Injecting head tag');
-      injectHTML(salespersonData.tag1, document.head);
+    // Inject conversion tag (only if tagType is 'conversion' or 'both')
+    if (salespersonData.conversion_tag && (tagType === 'conversion' || tagType === 'both')) {
+      console.log('🔍 GoogleTagInjector: Injecting conversion tag');
+      injectHTML(salespersonData.conversion_tag, document.head);
     }
 
-    // Inject body tag (tag2) - this will be placed at the beginning of body
-    if (salespersonData.tag2) {
-      console.log('🔍 GoogleTagInjector: Injecting body tag');
-      injectHTML(salespersonData.tag2, document.body, 'prepend');
-    }
-
-    // Inject additional tracking code (tag3) - this will be placed at the end of body
-    if (salespersonData.tag3) {
-      console.log('🔍 GoogleTagInjector: Injecting additional tracking code');
-      injectHTML(salespersonData.tag3, document.body);
+    // Inject Google tag (gtag.js) (only if tagType is 'gtag' or 'both')
+    if (salespersonData.gtag_script && (tagType === 'gtag' || tagType === 'both')) {
+      console.log('🔍 GoogleTagInjector: Injecting Google tag');
+      injectHTML(salespersonData.gtag_script, document.head);
     }
 
     // Cleanup function to remove injected tags when component unmounts

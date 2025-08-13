@@ -2,6 +2,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SuccessMessage from '@/components/forms/customer-inquiry/SuccessMessage';
+import { ConversionTagInjector } from '@/components/ConversionTagInjector';
 import { useEffect } from 'react';
 
 const ThankYouPage = () => {
@@ -21,6 +22,9 @@ const ThankYouPage = () => {
 
   return (
     <div className="min-h-screen bg-black">
+      {/* Inject conversion tag if salesperson is in URL */}
+      <ConversionTagInjector />
+      
       <main className="pt-16">
         <div className="container mx-auto px-6 py-12">
           <SuccessMessage />

@@ -78,23 +78,17 @@ export const SalespersonList: React.FC<SalespersonListProps> = ({
                   <div className="text-sm text-muted-foreground space-y-1">
                     <p>{salesperson.email}</p>
                     {salesperson.phone && <p>{salesperson.phone}</p>}
-                                         {(salesperson.tag1 || salesperson.tag2 || salesperson.tag3) && (
+                                         {(salesperson.conversion_tag || salesperson.gtag_script) && (
                        <div className="space-y-1 mt-2">
-                         {salesperson.tag1 && (
+                         {salesperson.conversion_tag && (
                            <div className="flex items-center gap-2">
-                             <Badge variant="outline" className="text-xs">Head Tag</Badge>
+                             <Badge variant="outline" className="text-xs">Conversion Tag</Badge>
                              <span className="text-xs text-muted-foreground">✓ Configured</span>
                            </div>
                          )}
-                         {salesperson.tag2 && (
+                         {salesperson.gtag_script && (
                            <div className="flex items-center gap-2">
-                             <Badge variant="outline" className="text-xs">Body Tag</Badge>
-                             <span className="text-xs text-muted-foreground">✓ Configured</span>
-                           </div>
-                         )}
-                         {salesperson.tag3 && (
-                           <div className="flex items-center gap-2">
-                             <Badge variant="outline" className="text-xs">Additional</Badge>
+                             <Badge variant="outline" className="text-xs">Google Tag</Badge>
                              <span className="text-xs text-muted-foreground">✓ Configured</span>
                            </div>
                          )}

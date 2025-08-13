@@ -8,9 +8,8 @@ export interface SalespersonLink {
   phone?: string | null;
   services: string[];
   is_active: boolean;
-  tag1?: string | null;
-  tag2?: string | null;
-  tag3?: string | null;
+  conversion_tag?: string | null;
+  gtag_script?: string | null;
   created_at?: string;
   updated_at?: string;
 }

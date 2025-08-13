@@ -221,8 +221,8 @@ const SalespersonServicePage = () => {
 
   return (
     <div className="relative">
-      {/* Inject Google Tags from salesperson data */}
-      <GoogleTagInjector salespersonData={salespersonData.salesperson} />
+      {/* Inject Google Tag (gtag.js) from salesperson data */}
+      <GoogleTagInjector salespersonData={salespersonData.salesperson} tagType="gtag" />
       
       {/* Salesperson Banner */}
       <div className="fixed top-0 left-0 right-0 z-[999] bg-gradient-to-r from-primary/90 to-secondary/90 backdrop-blur-sm border-b border-border">

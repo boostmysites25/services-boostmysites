@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { SalespersonLink, AVAILABLE_SERVICES, salespersonLinkService } from '@/services/salespersonLinkService';
 import { GoogleTagExamples } from './GoogleTagExamples';
@@ -26,9 +27,8 @@ export const SalespersonForm: React.FC<SalespersonFormProps> = ({
     phone: salesperson?.phone || '',
     services: salesperson?.services || [],
     is_active: salesperson?.is_active ?? true,
-    tag1: salesperson?.tag1 || '',
-    tag2: salesperson?.tag2 || '',
-    tag3: salesperson?.tag3 || ''
+    conversion_tag: salesperson?.conversion_tag || '',
+    gtag_script: salesperson?.gtag_script || ''
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -136,41 +136,32 @@ export const SalespersonForm: React.FC<SalespersonFormProps> = ({
           </div>
 
           <div>
-            <Label htmlFor="tag1">Google Tag (Head Section)</Label>
-            <Input
-              id="tag1"
-              value={formData.tag1}
-              onChange={(e) => setFormData(prev => ({ ...prev, tag1: e.target.value }))}
-              placeholder="Paste Google Tag Manager script here (goes in &lt;head&gt;)"
+            <Label htmlFor="conversion_tag">Conversion Event Tag</Label>
+            <Textarea
+              id="conversion_tag"
+              value={formData.conversion_tag}
+              onChange={(e) => setFormData(prev => ({ ...prev, conversion_tag: e.target.value }))}
+              placeholder="Paste conversion event snippet here"
+              rows={4}
+              className="font-mono text-sm"
             />
             <p className="text-sm text-muted-foreground mt-1">
-              This tag will be inserted in the &lt;head&gt; section of the page. Usually contains the main GTM script.
+              This tag will be inserted in the &lt;head&gt; section. Usually contains the conversion event snippet.
             </p>
           </div>
 
           <div>
-            <Label htmlFor="tag2">Google Tag (Body Section)</Label>
-            <Input
-              id="tag2"
-              value={formData.tag2}
-              onChange={(e) => setFormData(prev => ({ ...prev, tag2: e.target.value }))}
-              placeholder="Paste Google Tag Manager noscript here (goes in &lt;body&gt;)"
+            <Label htmlFor="gtag_script">Google Tag (gtag.js)</Label>
+            <Textarea
+              id="gtag_script"
+              value={formData.gtag_script}
+              onChange={(e) => setFormData(prev => ({ ...prev, gtag_script: e.target.value }))}
+              placeholder="Paste Google tag (gtag.js) script here"
+              rows={6}
+              className="font-mono text-sm"
             />
             <p className="text-sm text-muted-foreground mt-1">
-              This tag will be inserted in the &lt;body&gt; section of the page. Usually contains the noscript fallback.
-            </p>
-          </div>
-
-          <div>
-            <Label htmlFor="tag3">Additional Tracking Code</Label>
-            <Input
-              id="tag3"
-              value={formData.tag3}
-              onChange={(e) => setFormData(prev => ({ ...prev, tag3: e.target.value }))}
-              placeholder="Paste any additional tracking code here (optional)"
-            />
-            <p className="text-sm text-muted-foreground mt-1">
-              Optional: Additional tracking codes like Google Analytics, Facebook Pixel, etc.
+              This tag will be inserted in the &lt;head&gt; section. Usually contains the gtag.js script.
             </p>
           </div>
 

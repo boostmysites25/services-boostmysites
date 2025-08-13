@@ -19,6 +19,8 @@ export interface CustomerInquiryFormProps {
   sourcePage?: string;
   onSuccess?: () => void;
   className?: string;
+  salespersonName?: string;
+  serviceName?: string;
 }
 
 export const services = [

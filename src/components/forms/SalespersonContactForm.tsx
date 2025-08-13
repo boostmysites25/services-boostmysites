@@ -202,7 +202,12 @@ const SalespersonContactForm = ({
         // Reset form
         form.reset();
 
-        navigate("/thank-you");
+        // Pass salesperson information to thank you page
+        const params = new URLSearchParams();
+        if (salespersonName) params.append('salesperson', salespersonName);
+        if (serviceName) params.append('service', serviceName);
+        
+        navigate(`/thank-you?${params.toString()}`);
       }
     } catch (error) {
       const errorMessage =
