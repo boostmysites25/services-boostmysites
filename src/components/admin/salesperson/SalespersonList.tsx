@@ -78,6 +78,28 @@ export const SalespersonList: React.FC<SalespersonListProps> = ({
                   <div className="text-sm text-muted-foreground space-y-1">
                     <p>{salesperson.email}</p>
                     {salesperson.phone && <p>{salesperson.phone}</p>}
+                                         {(salesperson.tag1 || salesperson.tag2 || salesperson.tag3) && (
+                       <div className="space-y-1 mt-2">
+                         {salesperson.tag1 && (
+                           <div className="flex items-center gap-2">
+                             <Badge variant="outline" className="text-xs">Head Tag</Badge>
+                             <span className="text-xs text-muted-foreground">✓ Configured</span>
+                           </div>
+                         )}
+                         {salesperson.tag2 && (
+                           <div className="flex items-center gap-2">
+                             <Badge variant="outline" className="text-xs">Body Tag</Badge>
+                             <span className="text-xs text-muted-foreground">✓ Configured</span>
+                           </div>
+                         )}
+                         {salesperson.tag3 && (
+                           <div className="flex items-center gap-2">
+                             <Badge variant="outline" className="text-xs">Additional</Badge>
+                             <span className="text-xs text-muted-foreground">✓ Configured</span>
+                           </div>
+                         )}
+                       </div>
+                     )}
                   </div>
                 </div>
                 <div className="flex gap-2">

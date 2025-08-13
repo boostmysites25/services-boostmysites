@@ -6,6 +6,7 @@ import {
 } from "@/services/salespersonLinkService";
 import { Loader2 } from "lucide-react";
 import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
+import { GoogleTagInjector } from "@/components/GoogleTagInjector";
 
 // Import service page components
 import WebAppsPage from "./WebAppsPage";
@@ -220,6 +221,9 @@ const SalespersonServicePage = () => {
 
   return (
     <div className="relative">
+      {/* Inject Google Tags from salesperson data */}
+      <GoogleTagInjector salespersonData={salespersonData.salesperson} />
+      
       {/* Salesperson Banner */}
       <div className="fixed top-0 left-0 right-0 z-[999] bg-gradient-to-r from-primary/90 to-secondary/90 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-6 py-3">
