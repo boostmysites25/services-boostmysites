@@ -75,10 +75,16 @@ const ReviewCard = memo(({ review, index, getServiceColor }: ReviewCardProps) =>
         {/* Client Info */}
         <div className="flex items-center">
           <img 
-            src={review.image} 
-            alt={review.name} 
+            src={review.image}
+            alt={review.name}
             className="w-12 h-12 rounded-full border border-cyan-400/30 mr-3"
             loading="lazy"
+            onError={(e) => {
+              const target = e.currentTarget as HTMLImageElement;
+              if (target.src.indexOf('/placeholder.svg') === -1) {
+                target.src = '/placeholder.svg';
+              }
+            }}
           />
           <div>
             <div className="font-semibold text-white">{review.name}</div>

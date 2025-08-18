@@ -4,11 +4,12 @@ import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
+import ServiceReviewsSection from '@/components/ServiceReviewsSection';
 
 interface ChatbotDevelopmentPageProps {
-  salespersonData?: any;
-  salesperson?: any;
-  service?: any;
+  salespersonData?: unknown;
+  salesperson?: unknown;
+  service?: unknown;
   salespersonEmail?: string;
 }
 
@@ -280,6 +281,58 @@ const ChatbotDevelopmentPage = ({
           </div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <ServiceReviewsSection
+        serviceName="Chatbot Development"
+        accentColor="teal"
+        reviews={[
+          {
+            id: 1,
+            name: "Vikram J.",
+            role: "Customer Service Director",
+            company: "RetailHub",
+            rating: 5,
+            review:
+              "Our AI chatbot deflects 70% of tickets and provides instant answers. Integration with our knowledge base and CRM was seamless.",
+            image:
+              "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 2,
+            name: "Sarah",
+            role: "Head of Support",
+            company: "FinServe",
+            rating: 5,
+            review:
+              "Multilingual chatbot handles routine queries across web and WhatsApp. Average response time dropped from minutes to seconds.",
+            image:
+              "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 3,
+            name: "Jerin J.",
+            role: "Product Lead",
+            company: "HealthLink",
+            rating: 5,
+            review:
+              "HIPAA-conscious design, appointment booking flows, and voice support—patients get help 24/7 without waiting on hold.",
+            image:
+              "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 4,
+            name: "Carlos M.",
+            role: "CTO",
+            company: "LogiPro",
+            rating: 5,
+            review:
+              "They trained custom intents from our historical tickets. The bot escalates edge cases to agents with full context—huge time saver.",
+            image:
+              "https://images.unsplash.com/photo-1544005313-7bf79d5f84fa?w=150&h=150&fit=crop&crop=face",
+          },
+        ]}
+      />
 
       {/* Pricing Section */}
       <ServicePricingSection 

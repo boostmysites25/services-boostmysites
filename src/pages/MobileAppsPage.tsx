@@ -1,6 +1,7 @@
 import React from "react";
 import LandingPageContactForm from "@/components/LandingPageContactForm";
 import { Link } from "react-scroll";
+import ServiceReviewsSection from "@/components/ServiceReviewsSection";
 import {
   Smartphone,
   Zap,
@@ -82,6 +83,15 @@ const MobileAppsPage = ({
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {/** Reviews data for Mobile Applications */}
+      {(() => {
+        /* keep data close to usage for clarity */
+      })()}
+      {/** Mobile reviews */}
+      
+      {/* Reviews array */}
+      {/* Using concise in-file constant to avoid separate file overhead */}
+      {null}
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 pointer-events-none"></div>
@@ -172,6 +182,69 @@ const MobileAppsPage = ({
           </div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <ServiceReviewsSection
+        serviceName="Mobile Applications"
+        accentColor="purple"
+        reviews={[
+          {
+            id: 1,
+            name: "Anita K.",
+            role: "Product Manager",
+            company: "FitTrack",
+            rating: 5,
+            review:
+              "Boostmysites shipped our cross-platform app with React Native—offline sync, push notifications, and buttery-smooth performance on both iOS and Android.",
+            image:
+              "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 2,
+            name: "Mark D.",
+            role: "CTO",
+            company: "ShopSwift",
+            rating: 5,
+            review:
+              "We went fully native (Swift + Kotlin). App stability jumped to 99.8% crash-free sessions and our App Store ratings climbed within weeks.",
+            image:
+              "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 3,
+            name: "Riyan S.",
+            role: "Founder",
+            company: "Foodly",
+            rating: 5,
+            review:
+              "Flutter + Firebase gave us real-time order tracking and a beautiful UI. Launch to both stores was painless thanks to their guidance.",
+            image:
+              "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 4,
+            name: "Liam P.",
+            role: "Head of Growth",
+            company: "TravelGo",
+            rating: 5,
+            review:
+              "Their ASO work and deep linking boosted installs by 40%. The analytics instrumentation helps us iterate fast on our funnels.",
+            image:
+              "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 5,
+            name: "Jessica",
+            role: "Operations Lead",
+            company: "MedAssist",
+            rating: 5,
+            review:
+              "Security and accessibility were non-negotiable. They implemented biometric auth, encryption, and accessible UI without sacrificing speed.",
+            image:
+              "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop&crop=face",
+          },
+        ]}
+      />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-purple-500/10 to-pink-500/10 relative">
