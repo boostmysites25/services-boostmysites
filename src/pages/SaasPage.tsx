@@ -1,6 +1,7 @@
 import React from "react";
 import LandingPageContactForm from "@/components/LandingPageContactForm";
 import { Link } from "react-scroll";
+import ServiceReviewsSection from "@/components/ServiceReviewsSection";
 import {
   Cloud,
   Zap,
@@ -170,6 +171,47 @@ const SaasPage = ({
           </div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <ServiceReviewsSection
+        serviceName="SaaS Solutions"
+        accentColor="blue"
+        reviews={[
+          {
+            id: 1,
+            name: "Aparna R.",
+            role: "Founder",
+            company: "EduFlex LMS",
+            rating: 5,
+            review:
+              "From ideation to launch, they built a robust multi-tenant SaaS with subscriptions, analytics, and zero-downtime releases.",
+            image:
+              "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 2,
+            name: "Taran V.",
+            role: "Founder",
+            company: "InvoicePro",
+            rating: 5,
+            review:
+              "Billing, roles, audit logs—everything just works. Our MRR is growing steadily since launch.",
+            image:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+          },
+          {
+            id: 3,
+            name: "Linda S.",
+            role: "CMO",
+            company: "HostEase",
+            rating: 5,
+            review:
+              "The architecture is clean and scalable. Feature shipping is fast thanks to their developer tooling.",
+            image:
+              "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+          },
+        ]}
+      />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 relative">

@@ -4,11 +4,12 @@ import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
+import ServiceReviewsSection from '@/components/ServiceReviewsSection';
 
 interface AiDevelopmentPageProps {
-  salespersonData?: any;
-  salesperson?: any;
-  service?: any;
+  salespersonData?: unknown;
+  salesperson?: unknown;
+  service?: unknown;
   salespersonEmail?: string;
 }
 
@@ -216,6 +217,47 @@ const AiDevelopmentPage = ({
         position="after-success-stories" 
         accentColor="purple"
         backgroundColor="transparent"
+      />
+
+      {/* Reviews Section */}
+      <ServiceReviewsSection
+        serviceName="AI Development"
+        accentColor="purple"
+        reviews={[
+          {
+            id: 1,
+            name: 'Michael R.',
+            role: 'Head of Risk',
+            company: 'DataCorp Analytics',
+            rating: 5,
+            review:
+              'Our fraud detection moved from hours to real-time with >99% accuracy. The ROI was immediate.',
+            image:
+              'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+          },
+          {
+            id: 2,
+            name: 'Sarah K.',
+            role: 'VP Operations',
+            company: 'RetailVision Inc',
+            rating: 5,
+            review:
+              'Computer vision reduced stockouts by 95% and improved inventory turnover by 40%.',
+            image:
+              'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+          },
+          {
+            id: 3,
+            name: 'Daniel P.',
+            role: 'CTO',
+            company: 'InsightX',
+            rating: 5,
+            review:
+              'They shipped custom ML models and integrated them cleanly into our data stack and APIs.',
+            image:
+              'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=150&h=150&fit=crop&crop=face',
+          },
+        ]}
       />
 
       {/* Features Section */}

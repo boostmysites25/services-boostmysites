@@ -37,7 +37,8 @@ const ServiceReviewsSection = ({ serviceName, reviews, accentColor = 'purple' }:
       teal: 'text-teal-400',
       pink: 'text-pink-400',
       blue: 'text-blue-400',
-      green: 'text-green-400'
+      green: 'text-green-400',
+      orange: 'text-orange-400'
     };
     return colorMap[parsedAccent] || 'text-white';
   }, [parsedAccent]);
@@ -52,7 +53,8 @@ const ServiceReviewsSection = ({ serviceName, reviews, accentColor = 'purple' }:
       teal: 'via-teal-300',
       pink: 'via-pink-300',
       blue: 'via-blue-300',
-      green: 'via-green-300'
+      green: 'via-green-300',
+      orange: 'via-orange-300'
     };
     return sepMap[parsedAccent] || 'via-gray-300';
   }, [parsedAccent]);
@@ -68,7 +70,8 @@ const ServiceReviewsSection = ({ serviceName, reviews, accentColor = 'purple' }:
         teal: 'bg-teal-500/10 text-teal-300 border-teal-400/30',
         pink: 'bg-pink-500/10 text-pink-300 border-pink-400/30',
         blue: 'bg-blue-500/10 text-blue-300 border-blue-400/30',
-        green: 'bg-green-500/10 text-green-300 border-green-400/30'
+        green: 'bg-green-500/10 text-green-300 border-green-400/30',
+        orange: 'bg-orange-500/10 text-orange-300 border-orange-400/30'
       };
       return badgeMap[parsedAccent] || 'bg-gray-500/10 text-gray-300 border-gray-400/30';
     };
