@@ -73,13 +73,13 @@ const PersonalInformationStep = ({ control }: PersonalInformationStepProps) => {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-gray-300">Phone Number</FormLabel>
+              <FormLabel className="text-gray-300">Phone Number *</FormLabel>
               <FormControl>
                 <Input 
                   {...field} 
                   type="tel"
                   className="bg-gray-800/50 border-gray-600/50 text-white focus:ring-cyan-500 focus:border-cyan-500"
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+1 (555) 123-4567 (10+ digits)"
                 />
               </FormControl>
               <FormMessage className="text-red-400" />

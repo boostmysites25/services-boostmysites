@@ -45,7 +45,7 @@ export const SalespersonForm: React.FC<SalespersonFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.salesperson_name || !formData.display_name || !formData.email) {
+    if (!formData.salesperson_name || !formData.display_name || !formData.email || !formData.phone) {
       toast.error('Please fill in all required fields');
       return;
     }
@@ -125,13 +125,14 @@ export const SalespersonForm: React.FC<SalespersonFormProps> = ({
           </div>
 
           <div>
-            <Label htmlFor="phone">Phone Number</Label>
+            <Label htmlFor="phone">Phone Number *</Label>
             <Input
               id="phone"
               type="tel"
               value={formData.phone}
               onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
               placeholder="+91 98765 43210"
+              required
             />
           </div>
 
