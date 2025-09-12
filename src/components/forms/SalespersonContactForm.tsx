@@ -41,7 +41,7 @@ const salespersonFormSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   subject: z.string().min(5, "Subject must be at least 5 characters"),
   message: z.string().min(10, "Message must be at least 10 characters"),
-  budget: z.string().min(1, "Please select a budget range"),
+  budget: z.string().optional(),
 });
 
 type SalespersonFormData = z.infer<typeof salespersonFormSchema>;
@@ -57,7 +57,8 @@ interface SalespersonContactFormProps {
   /** 
    * Custom budget options for the dropdown. If not provided, 
    * service-specific options will be used based on serviceName.
-   * @example ["Under $5,000", "$5,000 - $10,000", "Let's discuss"]
+   * If empty array or no options available, budget field will be hidden.
+   * @example ["Less than ₹1,00,000", "₹1,00,000 – ₹2,50,000", "Let's discuss"]
    */
   budgetOptions?: string[];
 }
@@ -76,8 +77,15 @@ const SalespersonContactForm = ({
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  // Create dynamic schema based on whether budget options are available
+  const dynamicSchema = budgetOptions.length > 0 
+    ? salespersonFormSchema.extend({
+        budget: z.string().min(1, "Please select a budget range"),
+      })
+    : salespersonFormSchema;
+
   const form = useForm<SalespersonFormData>({
-    resolver: zodResolver(salespersonFormSchema),
+    resolver: zodResolver(dynamicSchema),
     defaultValues: {
       fullName: "",
       email: "",
@@ -185,9 +193,7 @@ const SalespersonContactForm = ({
       "\n\n" +
       "Service : " +
       serviceName +
-      "\n\n" +
-      "Budget : " +
-      data.budget +
+      (data.budget ? "\n\nBudget : " + data.budget : "") +
       "\n\n" +
       "Message : \n" +
       data.message;
@@ -344,37 +350,40 @@ const SalespersonContactForm = ({
               />
             </div>
 
-            <FormField
-              control={form.control}
-              name="budget"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-gray-300 flex items-center gap-2 font-medium">
-                    <DollarSign className="h-4 w-4" />
-                    Budget Range *
-                  </FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className={`bg-gray-800/50 border-gray-600 text-white ${styling.focusBorder} ${styling.focusRing} transition-all duration-300`}>
-                        <SelectValue placeholder="Select your budget range" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent className="bg-gray-800 border-gray-600">
-                      {budgetOptions.map((option) => (
-                        <SelectItem 
-                          key={option} 
-                          value={option}
-                          className="text-white hover:bg-gray-700 focus:bg-gray-400"
-                        >
-                          {option}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage className="text-red-400" />
-                </FormItem>
-              )}
-            />
+            {/* Budget field - only show if budget options are available */}
+            {budgetOptions.length > 0 && (
+              <FormField
+                control={form.control}
+                name="budget"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-300 flex items-center gap-2 font-medium">
+                      <DollarSign className="h-4 w-4" />
+                      Budget Range *
+                    </FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className={`bg-gray-800/50 border-gray-600 text-white ${styling.focusBorder} ${styling.focusRing} transition-all duration-300`}>
+                          <SelectValue placeholder="Select your budget range" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="bg-gray-800 border-gray-600">
+                        {budgetOptions.map((option) => (
+                          <SelectItem 
+                            key={option} 
+                            value={option}
+                            className="text-white hover:bg-gray-700 focus:bg-gray-400"
+                          >
+                            {option}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage className="text-red-400" />
+                  </FormItem>
+                )}
+              />
+            )}
 
             <FormField
               control={form.control}
