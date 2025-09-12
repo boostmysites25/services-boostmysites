@@ -14,6 +14,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { customerInquiryService } from "@/services/customerInquiryService";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -23,8 +30,10 @@ import {
   MessageSquare,
   AlertCircle,
   Send,
+  DollarSign,
 } from "lucide-react";
 import axios from "axios";
+import { getBudgetOptions } from "@/lib/budgetOptions";
 
 const salespersonFormSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
@@ -32,6 +41,7 @@ const salespersonFormSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   subject: z.string().min(5, "Subject must be at least 5 characters"),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  budget: z.string().min(1, "Please select a budget range"),
 });
 
 type SalespersonFormData = z.infer<typeof salespersonFormSchema>;
@@ -44,6 +54,12 @@ interface SalespersonContactFormProps {
   onSuccess?: () => void;
   className?: string;
   accentColor?: string;
+  /** 
+   * Custom budget options for the dropdown. If not provided, 
+   * service-specific options will be used based on serviceName.
+   * @example ["Under $5,000", "$5,000 - $10,000", "Let's discuss"]
+   */
+  budgetOptions?: string[];
 }
 
 const SalespersonContactForm = ({
@@ -53,6 +69,7 @@ const SalespersonContactForm = ({
   salespersonEmail,
   className = "",
   accentColor = "blue",
+  budgetOptions = getBudgetOptions(serviceName),
 }: SalespersonContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -67,6 +84,7 @@ const SalespersonContactForm = ({
       phone: "",
       subject: "",
       message: "",
+      budget: "",
     },
   });
 
@@ -167,6 +185,9 @@ const SalespersonContactForm = ({
       "\n\n" +
       "Service : " +
       serviceName +
+      "\n\n" +
+      "Budget : " +
+      data.budget +
       "\n\n" +
       "Message : \n" +
       data.message;
@@ -322,6 +343,38 @@ const SalespersonContactForm = ({
                 )}
               />
             </div>
+
+            <FormField
+              control={form.control}
+              name="budget"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300 flex items-center gap-2 font-medium">
+                    <DollarSign className="h-4 w-4" />
+                    Budget Range *
+                  </FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className={`bg-gray-800/50 border-gray-600 text-white ${styling.focusBorder} ${styling.focusRing} transition-all duration-300`}>
+                        <SelectValue placeholder="Select your budget range" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-gray-800 border-gray-600">
+                      {budgetOptions.map((option) => (
+                        <SelectItem 
+                          key={option} 
+                          value={option}
+                          className="text-white hover:bg-gray-700 focus:bg-gray-400"
+                        >
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
