@@ -115,14 +115,6 @@ const DynamicContactForm: React.FC<DynamicContactFormProps> = ({
           focusBorder: "focus:border-indigo-400",
           focusRing: "focus:ring-indigo-400/20",
         };
-      case "teal":
-        return {
-          textGradient: "from-teal-300 to-teal-400",
-          buttonGradient: "bg-teal-500",
-          buttonHover: "hover:bg-teal-600",
-          focusBorder: "focus:border-teal-400",
-          focusRing: "focus:ring-teal-400/20",
-        };
       case "orange":
         return {
           textGradient: "from-orange-300 to-orange-400",
@@ -200,12 +192,6 @@ const DynamicContactForm: React.FC<DynamicContactFormProps> = ({
           {finalData.ref && (
             <p className="text-sm text-gray-400 mt-2">
               Referred by: {finalData.ref}
-            </p>
-          )}
-          {demoMode && (
-            <p className={`text-xs text-${accentColor}-400 mt-2`}>
-              🧪 Demo Mode - This form demonstrates the dynamic contact form
-              functionality
             </p>
           )}
         </div>

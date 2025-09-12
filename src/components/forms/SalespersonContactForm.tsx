@@ -122,13 +122,6 @@ const SalespersonContactForm = ({
           buttonGradient: "bg-indigo-500",
           buttonHover: "hover:bg-indigo-600",
         };
-      case "teal":
-        return {
-          focusBorder: "focus:border-teal-400",
-          focusRing: "focus:ring-teal-400/20",
-          buttonGradient: "bg-teal-500",
-          buttonHover: "hover:bg-teal-600",
-        };
       case "orange":
         return {
           focusBorder: "focus:border-orange-400",
@@ -184,7 +177,7 @@ const SalespersonContactForm = ({
       to: salespersonEmail,
     };
 
-    console.log(salespersonEmail)
+    console.log(salespersonEmail);
 
     try {
       const res = await axios.post(
@@ -204,10 +197,12 @@ const SalespersonContactForm = ({
 
         // Pass salesperson information to thank you page
         const params = new URLSearchParams();
-        if (salespersonName) params.append('salesperson', salespersonName);
-        if (serviceName) params.append('service', serviceName);
-        
-        navigate(`/thank-you?${params.toString()}`);
+        if (salespersonName) params.append("salesperson", salespersonName);
+        if (serviceName) params.append("service", serviceName);
+
+        const thankYouUrl = `/thank-you?${params.toString()}`;
+        console.log("SalespersonContactForm: Navigating to:", thankYouUrl);
+        navigate(thankYouUrl);
       }
     } catch (error) {
       const errorMessage =
@@ -357,13 +352,12 @@ const SalespersonContactForm = ({
               {isSubmitting ? (
                 <div className="flex items-center gap-2">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Sending Message...
+                  Submitting...
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
                   <Send className="h-5 w-5" />
-                  Send Message to{" "}
-                  <span className="capitalize">{salespersonName}</span>
+                  Submit
                 </div>
               )}
             </Button>

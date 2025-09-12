@@ -9,10 +9,25 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const SuccessMessage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  
+  // Get salesperson and service from URL parameters
+  const salesperson = searchParams.get('salesperson');
+  const service = searchParams.get('service');
+  
+  // Debug logging
+  useEffect(() => {
+    console.log("SuccessMessage: URL parameters received:", {
+      salesperson,
+      service,
+      allParams: Object.fromEntries(searchParams.entries())
+    });
+  }, [salesperson, service, searchParams]);
   return (
     <div className="relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -34,6 +49,20 @@ const SuccessMessage = () => {
         <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-cyan-200 to-blue-300 bg-clip-text text-transparent animate-fade-in">
           🚀 Your Vision is Our Mission!
         </h2>
+
+        {/* Personalized Message */}
+        {salesperson && (
+          <div className="mb-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <p className="text-xl md:text-2xl text-cyan-300 font-semibold">
+              Thank you for reaching out, {salesperson.replace(/\+/g, ' ')}!
+            </p>
+            {service && (
+              <p className="text-lg md:text-xl text-gray-300 mt-2">
+                We're excited to help you with your <span className="text-cyan-300 font-bold">{service.replace(/\+/g, ' ')}</span> project.
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Motivational Subheading */}
         <p
@@ -138,6 +167,11 @@ const SuccessMessage = () => {
           <h3 className="text-2xl font-bold text-white mb-6">
             What Happens Next? 🎯
           </h3>
+          {salesperson && (
+            <p className="text-lg text-gray-300 mb-6 text-center">
+              {salesperson.replace(/\+/g, ' ')} will personally review your inquiry and get back to you soon!
+            </p>
+          )}
           <div className="space-y-4 text-left max-w-2xl mx-auto">
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0 w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center text-black font-bold">
