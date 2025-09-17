@@ -6,6 +6,7 @@ import PortfolioProjectsGrid from "@/components/portfolio/PortfolioProjectsGrid"
 import PortfolioCTASection from "@/components/portfolio/PortfolioCTASection";
 import { getPortfolioData } from "@/services/portfolioDataService";
 import { Service } from "@/data/projects";
+import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
 
 const Portfolio = () => {
   const navigate = useNavigate();
@@ -120,6 +121,7 @@ const Portfolio = () => {
           <PortfolioCTASection />
         </div>
       </section>
+      <FloatingWhatsAppButton />
     </div>
   );
 };

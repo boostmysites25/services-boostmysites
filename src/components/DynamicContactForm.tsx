@@ -197,7 +197,7 @@ const DynamicContactForm: React.FC<DynamicContactFormProps> = ({
         </div>
 
         <SalespersonContactForm
-          salespersonName={finalData.salespersonData.display_name}
+          salespersonName={finalData.salespersonData.salesperson_name}
           serviceName={finalData.serviceData.name}
           sourcePage={
             demoMode

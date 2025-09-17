@@ -4,6 +4,7 @@ import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 interface BlockchainDevelopmentPageProps {
   salespersonData?: any;
@@ -218,6 +219,7 @@ const BlockchainDevelopmentPage = ({
         accentColor="yellow"
         backgroundColor="transparent"
       />
+      <FloatingWhatsAppButton />
     </div>
   );
 };

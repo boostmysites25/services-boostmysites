@@ -9,6 +9,7 @@ import { getCombinedBlogs, onBlogsChange, findBlog } from '@/services/blogDataSe
 import { formatPlainTextContent } from '@/lib/contentUtils';
 import { extractIdFromSlug } from '@/lib/slugUtils';
 import { BlogPost } from '@/data/blogs';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -143,6 +144,7 @@ const BlogPostPage = () => {
       </article>
       
       {/* <Footer /> */}
+      <FloatingWhatsAppButton />
     </div>
   );
 };

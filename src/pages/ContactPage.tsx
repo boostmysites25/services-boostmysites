@@ -1,4 +1,5 @@
 import Contact from '@/components/Contact';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 const ContactPage = () => {
   return (
@@ -6,6 +7,7 @@ const ContactPage = () => {
       <main className="pt-16">
         <Contact />
       </main>
+      <FloatingWhatsAppButton />
     </div>
   );
 };

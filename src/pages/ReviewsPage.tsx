@@ -3,6 +3,7 @@ import { Star, Filter, Zap, Shield, Users, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import ReviewCard from '@/components/ReviewCard';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 interface Review {
   id: number;
@@ -334,6 +335,7 @@ const ReviewsPage = () => {
         </div>
       </section>
 
+      <FloatingWhatsAppButton />
     </div>
   );
 };

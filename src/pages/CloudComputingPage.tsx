@@ -4,6 +4,7 @@ import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 interface CloudComputingPageProps {
   salespersonData?: any;
@@ -298,6 +299,7 @@ const CloudComputingPage = ({
         accentColor="indigo"
         backgroundColor="transparent"
       />
+      <FloatingWhatsAppButton />
     </div>
   );
 };

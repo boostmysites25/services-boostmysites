@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { salespersonLinkService } from '@/services/salespersonLinkService';
+import { salespersonLinkService, SalespersonLink } from '@/services/salespersonLinkService';
 import { GoogleTagInjector } from './GoogleTagInjector';
 
 export const ConversionTagInjector: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const [salespersonData, setSalespersonData] = useState<any>(null);
+  const [salespersonData, setSalespersonData] = useState<SalespersonLink | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ export const ConversionTagInjector: React.FC = () => {
           
           // Fetch all salespersons and find the matching one
           const salespersons = await salespersonLinkService.getSalespersonLinks();
+          console.log({salespersons})
           const foundSalesperson = salespersons.find(
             (sp) => sp.salesperson_name === salesperson && sp.is_active
           );
@@ -51,6 +52,6 @@ export const ConversionTagInjector: React.FC = () => {
     return null; // Don't render anything if no salesperson data
   }
 
-  // Only inject conversion tag
-  return <GoogleTagInjector salespersonData={salespersonData} tagType="conversion" />;
+  // Inject both gtag script and conversion tag to ensure gtag is available
+  return <GoogleTagInjector salespersonData={salespersonData} tagType="both" />;
 };

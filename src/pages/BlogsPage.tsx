@@ -6,6 +6,7 @@ import BlogCategories from '@/components/blog/BlogCategories';
 import BlogSearch from '@/components/blog/BlogSearch';
 import { getCombinedBlogs, onBlogsChange } from '@/services/blogDataService';
 import { BlogPost } from '@/data/blogs';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 const BlogsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -86,6 +87,7 @@ const BlogsPage = () => {
       </section>
       
       {/* <Footer /> */}
+      <FloatingWhatsAppButton />
     </div>
   );
 };

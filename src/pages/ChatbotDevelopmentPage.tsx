@@ -5,6 +5,7 @@ import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
 import ServiceReviewsSection from '@/components/ServiceReviewsSection';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 interface ChatbotDevelopmentPageProps {
   salespersonData?: unknown;
@@ -368,6 +369,7 @@ const ChatbotDevelopmentPage = ({
         accentColor="teal"
         backgroundColor="transparent"
       />
+      <FloatingWhatsAppButton />
     </div>
   );
 };

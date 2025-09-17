@@ -4,6 +4,7 @@ import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 interface DataAnalyticsPageProps {
   salespersonData?: any;
@@ -333,6 +334,7 @@ const DataAnalyticsPage = ({
         accentColor="indigo"
         backgroundColor="transparent"
       />
+      <FloatingWhatsAppButton />
     </div>
   );
 };

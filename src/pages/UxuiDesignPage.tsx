@@ -4,6 +4,7 @@ import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 interface UxuiDesignPageProps {
   salespersonData?: any;
@@ -298,6 +299,7 @@ const UxuiDesignPage = ({
         accentColor="purple"
         backgroundColor="transparent"
       />
+      <FloatingWhatsAppButton />
     </div>
   );
 };

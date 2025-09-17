@@ -4,6 +4,7 @@ import ServicePortfolioSection from '@/components/ServicePortfolioSection';
 import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 interface ArVrDevelopmentPageProps {
   salespersonData?: any;
@@ -247,6 +248,7 @@ const ArVrDevelopmentPage = ({
         accentColor="green"
         backgroundColor="transparent"
       />
+      <FloatingWhatsAppButton />
     </div>
   );
 };

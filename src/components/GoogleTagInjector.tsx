@@ -62,16 +62,41 @@ export const GoogleTagInjector: React.FC<GoogleTagInjectorProps> = ({ salesperso
       }
     };
 
-    // Inject conversion tag (only if tagType is 'conversion' or 'both')
-    if (salespersonData.conversion_tag && (tagType === 'conversion' || tagType === 'both')) {
-      console.log('🔍 GoogleTagInjector: Injecting conversion tag');
-      injectHTML(salespersonData.conversion_tag, document.head);
-    }
+    // Function to inject conversion tag with gtag dependency check
+    const injectConversionTag = () => {
+      if (salespersonData.conversion_tag && (tagType === 'conversion' || tagType === 'both')) {
+        console.log('🔍 GoogleTagInjector: Injecting conversion tag');
+        
+        // Check if gtag is available, if not wait for it
+        if (typeof window !== 'undefined' && window.gtag) {
+          injectHTML(salespersonData.conversion_tag, document.head);
+        } else {
+          // Wait for gtag to be available
+          const checkGtag = () => {
+            if (typeof window !== 'undefined' && window.gtag) {
+              injectHTML(salespersonData.conversion_tag, document.head);
+            } else {
+              setTimeout(checkGtag, 100);
+            }
+          };
+          checkGtag();
+        }
+      }
+    };
 
-    // Inject Google tag (gtag.js) (only if tagType is 'gtag' or 'both')
+    // Inject Google tag (gtag.js) first (only if tagType is 'gtag' or 'both')
     if (salespersonData.gtag_script && (tagType === 'gtag' || tagType === 'both')) {
       console.log('🔍 GoogleTagInjector: Injecting Google tag');
       injectHTML(salespersonData.gtag_script, document.head);
+      
+      // If we're injecting both tags, wait for gtag to load before injecting conversion tag
+      if (tagType === 'both' && salespersonData.conversion_tag) {
+        // Wait a bit for gtag to initialize
+        setTimeout(injectConversionTag, 500);
+      }
+    } else if (tagType === 'conversion' && salespersonData.conversion_tag) {
+      // If only conversion tag is needed, inject it directly
+      injectConversionTag();
     }
 
     // Cleanup function to remove injected tags when component unmounts
@@ -84,7 +109,7 @@ export const GoogleTagInjector: React.FC<GoogleTagInjectorProps> = ({ salesperso
         }
       });
     };
-  }, [salespersonData]);
+  }, [salespersonData, tagType]);
 
   // This component doesn't render anything visible
   return null;

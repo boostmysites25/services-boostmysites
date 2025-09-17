@@ -2,6 +2,7 @@ import React from "react";
 import LandingPageContactForm from "@/components/LandingPageContactForm";
 import { Link } from "react-scroll";
 import ServiceReviewsSection from "@/components/ServiceReviewsSection";
+import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
 import {
   Phone,
   Bot,
@@ -242,6 +243,7 @@ const AiCallingPage = ({
           salespersonEmail={salespersonEmail}
         />
       )}
+      <FloatingWhatsAppButton />
     </div>
   );
 };

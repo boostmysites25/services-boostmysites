@@ -5,6 +5,7 @@ import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
 import ServiceReviewsSection from '@/components/ServiceReviewsSection';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 interface AiDevelopmentPageProps {
   salespersonData?: unknown;
@@ -342,6 +343,7 @@ const AiDevelopmentPage = ({
         accentColor="purple"
         backgroundColor="transparent"
       />
+      <FloatingWhatsAppButton />
     </div>
   );
 };

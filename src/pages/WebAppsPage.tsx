@@ -11,6 +11,7 @@ import LandingPageContactForm from "@/components/LandingPageContactForm";
 import DynamicContactForm from "@/components/DynamicContactForm";
 import { Link } from "react-scroll";
 import ServiceReviewsSection from "@/components/ServiceReviewsSection";
+import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
 
 interface WebAppsPageProps {
   salespersonData?: any;
@@ -95,6 +96,7 @@ const WebAppsPage = ({
       <DynamicContactForm position="bottom" />
       
       {/* <Footer /> */}
+      <FloatingWhatsAppButton />
     </div>
   );
 };

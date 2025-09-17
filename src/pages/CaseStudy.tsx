@@ -7,6 +7,7 @@ import { loadFullProject } from '@/services/projectService';
 import { onProjectsChange } from '@/services/caseStudyDataService';
 import { extractIdFromSlug } from '@/lib/slugUtils';
 import { Project } from '@/data/projects';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 const CaseStudy = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -97,6 +98,7 @@ const CaseStudy = () => {
   return (
     <div className="min-h-screen bg-black">
       <CaseStudyComponents project={project} />
+      <FloatingWhatsAppButton />
     </div>
   );
 };

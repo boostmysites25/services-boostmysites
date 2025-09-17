@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
 
 const PrivacyPolicyPage = () => {
   useEffect(() => {
@@ -268,6 +269,7 @@ const PrivacyPolicyPage = () => {
           </div>
         </div>
       </main>
+      <FloatingWhatsAppButton />
     </div>
   );
 };
