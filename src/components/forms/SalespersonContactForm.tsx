@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,6 +31,7 @@ import {
   AlertCircle,
   Send,
   DollarSign,
+  CheckCircle,
 } from "lucide-react";
 import axios from "axios";
 import { getBudgetOptions } from "@/lib/budgetOptions";
@@ -40,8 +41,9 @@ const salespersonFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   subject: z.string().min(5, "Subject must be at least 5 characters"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
   budget: z.string().optional(),
+  intent: z.string().min(1, "Please select your intent"),
+  purpose: z.string().optional(),
 });
 
 type SalespersonFormData = z.infer<typeof salespersonFormSchema>;
@@ -61,6 +63,8 @@ interface SalespersonContactFormProps {
    * @example ["Less than ₹1,00,000", "₹1,00,000 – ₹2,50,000", "Let's discuss"]
    */
   budgetOptions?: string[];
+  /** Service-specific intent question */
+  intentQuestion?: string;
 }
 
 const SalespersonContactForm = ({
@@ -71,6 +75,7 @@ const SalespersonContactForm = ({
   className = "",
   accentColor = "blue",
   budgetOptions = getBudgetOptions(serviceName),
+  intentQuestion,
 }: SalespersonContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -91,10 +96,27 @@ const SalespersonContactForm = ({
       email: "",
       phone: "",
       subject: "",
-      message: "",
       budget: "",
+      intent: "",
+      purpose: "",
     },
   });
+
+  // Watch intent for conditional validation
+  const watchedIntent = form.watch("intent");
+
+  // Custom validation for purpose field
+  const validatePurpose = (value: string) => {
+    if (watchedIntent && watchedIntent !== "") {
+      const words = value.trim().split(/\s+/).filter(word => word.length > 0);
+      if (words.length < 10) {
+        return watchedIntent === "yes" 
+          ? "Please provide at least 10 words describing your project purpose"
+          : "Please provide at least 10 words explaining your inquiry";
+      }
+    }
+    return true;
+  };
 
   // Get styling based on accent color
   const getAccentStyling = (color: string) => {
@@ -194,9 +216,8 @@ const SalespersonContactForm = ({
       "Service : " +
       serviceName +
       (data.budget ? "\n\nBudget : " + data.budget : "") +
-      "\n\n" +
-      "Message : \n" +
-      data.message;
+      `\n\nIntent : ${data.intent === "yes" ? "Needs Service" : "Just Exploring/Inquiring"}` +
+      (data.purpose ? `\n\n${data.intent === "yes" ? "Project Purpose" : "Inquiry Reason"} : ${data.purpose}` : "");
     const payload = {
       body,
       name: "Form Submission",
@@ -383,30 +404,93 @@ const SalespersonContactForm = ({
                   </FormItem>
                 )}
               />
-            )}
+             )}
 
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-gray-300 flex items-center gap-2 font-medium">
-                    <MessageSquare className="h-4 w-4" />
-                    Message *
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Tell us about your project, requirements, or any questions you have..."
-                      className={`bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 ${styling.focusBorder} ${styling.focusRing} transition-all duration-300 min-h-[140px] resize-none`}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-400" />
-                </FormItem>
-              )}
-            />
+             {/* Intent validation fields */}
+             {intentQuestion && (
+               <>
+                 <FormField
+                   control={form.control}
+                   name="intent"
+                   render={({ field }) => (
+                     <FormItem>
+                       <FormLabel className="text-gray-300 flex items-center gap-2 font-medium">
+                         <MessageSquare className="h-4 w-4" />
+                         {intentQuestion} *
+                       </FormLabel>
+                       <Select onValueChange={field.onChange} defaultValue={field.value}>
+                         <FormControl>
+                           <SelectTrigger className={`bg-gray-800/50 border-gray-600 text-white ${styling.focusBorder} ${styling.focusRing} transition-all duration-300`}>
+                             <SelectValue placeholder="Please select your answer" />
+                           </SelectTrigger>
+                         </FormControl>
+                         <SelectContent className="bg-gray-800 border-gray-600">
+                           <SelectItem value="yes" className="text-white hover:bg-gray-700">
+                             Yes, I need this service
+                           </SelectItem>
+                           <SelectItem value="no" className="text-white hover:bg-gray-700">
+                             No, I'm just exploring/inquiring
+                           </SelectItem>
+                         </SelectContent>
+                       </Select>
+                       <FormMessage className="text-red-400" />
+                     </FormItem>
+                   )}
+                 />
 
-            <Button
+                 {/* Purpose field - only show if intent is selected */}
+                 {watchedIntent && (
+                   <FormField
+                     control={form.control}
+                     name="purpose"
+                     render={({ field }) => (
+                       <FormItem>
+                         <FormLabel className="text-gray-300 flex items-center gap-2 font-medium">
+                           {watchedIntent === "yes" ? (
+                             <>
+                               <CheckCircle className="h-4 w-4 text-green-400" />
+                               Project Purpose *
+                             </>
+                           ) : (
+                             <>
+                               <AlertCircle className="h-4 w-4 text-yellow-400" />
+                               Reason for Inquiry *
+                             </>
+                           )}
+                         </FormLabel>
+                         <FormControl>
+                           <Textarea
+                             placeholder={
+                               watchedIntent === "yes"
+                                 ? "Please describe your project requirements, goals, and how this service will help your business. Be as detailed as possible (minimum 10 words)."
+                                 : "Please explain why you're contacting us and what information you're looking for. This helps us provide better assistance (minimum 10 words)."
+                             }
+                             className={`bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 ${styling.focusBorder} ${styling.focusRing} transition-all duration-300 min-h-[120px] resize-none`}
+                             {...field}
+                             onChange={(e) => {
+                               field.onChange(e);
+                               // Trigger validation
+                               const validation = validatePurpose(e.target.value);
+                               if (validation !== true) {
+                                 form.setError("purpose", { message: validation });
+                               } else {
+                                 form.clearErrors("purpose");
+                               }
+                             }}
+                           />
+                         </FormControl>
+                         <p className="text-sm text-gray-400 mt-1">
+                           {field.value?.trim().split(/\s+/).filter(word => word.length > 0).length || 0}/10 words minimum
+                         </p>
+                         <FormMessage className="text-red-400" />
+                       </FormItem>
+                     )}
+                   />
+                 )}
+               </>
+             )}
+
+             <Button
               type="submit"
               disabled={isSubmitting}
               className={`w-full ${styling.buttonGradient} text-white py-4 text-lg ${styling.buttonHover} transition-all duration-300 font-semibold shadow-lg hover:shadow-${accentColor}-500/25 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none rounded-xl`}

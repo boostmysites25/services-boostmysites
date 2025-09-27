@@ -5,6 +5,7 @@ import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
 import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
+import TrustBadges from '@/components/TrustBadges';
 
 interface CloudComputingPageProps {
   salespersonData?: any;
@@ -204,6 +205,9 @@ const CloudComputingPage = ({
         serviceName="Cloud Computing"
         accentColor="indigo"
       />
+
+      {/* Trust Badges Section */}
+      <TrustBadges />
 
       {/* Case Studies Section */}
       <ServiceCaseStudiesSection 

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import SalespersonContactForm from "./forms/SalespersonContactForm";
-import { Loader2 } from "lucide-react";
+import { Loader2, AlertCircle, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 interface DynamicContactFormProps {
   className?: string;
@@ -28,12 +32,35 @@ const DynamicContactForm: React.FC<DynamicContactFormProps> = ({
     isLoading,
   } = useUrlParams();
 
+
   // Use demo data if in demo mode, otherwise use URL params
   const finalData = {
     salespersonData,
     serviceData,
     ref,
   };
+
+  // Get service-specific intent question
+  const getServiceIntentQuestion = (serviceName: string) => {
+    const questions: { [key: string]: string } = {
+      "Web Applications": "Do you need a custom web application built for your business?",
+      "Mobile Applications": "Do you need a mobile app developed for iOS/Android?",
+      "SaaS Solutions": "Do you need a SaaS platform or subscription-based software?",
+      "AI Automation": "Do you need AI-powered automation for your business processes?",
+      "AI Calling Agency": "Do you need AI-powered calling solutions for lead generation?",
+      "AI Development": "Do you need custom AI solutions or machine learning models?",
+      "Blockchain Development": "Do you need blockchain solutions or smart contracts?",
+      "AR/VR Development": "Do you need augmented reality or virtual reality applications?",
+      "Chatbot Development": "Do you need intelligent chatbots for customer support?",
+      "Cloud Computing": "Do you need cloud infrastructure or migration services?",
+      "Data Analytics": "Do you need data analytics and business intelligence solutions?",
+      "Game Development": "Do you need custom game development services?",
+      "IoT Development": "Do you need Internet of Things solutions for your business?",
+      "UX/UI Design": "Do you need user experience and interface design services?"
+    };
+    return questions[serviceName] || "Do you need this service for your business?";
+  };
+
 
   // Don't render if no URL parameters or invalid (unless in demo mode)
   if (isLoading && !demoMode) {
@@ -207,6 +234,7 @@ const DynamicContactForm: React.FC<DynamicContactFormProps> = ({
           salespersonEmail={finalData.salespersonData.email}
           className="mt-8"
           accentColor={accentColor}
+          intentQuestion={getServiceIntentQuestion(finalData.serviceData.name)}
         />
       </div>
     </section>

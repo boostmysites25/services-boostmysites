@@ -5,6 +5,7 @@ import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
 import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
+import TrustBadges from '@/components/TrustBadges';
 
 interface DataAnalyticsPageProps {
   salespersonData?: any;
@@ -237,6 +238,9 @@ const DataAnalyticsPage = ({
         serviceName="Data Analytics & BI"
         accentColor="indigo"
       />
+
+      {/* Trust Badges Section */}
+      <TrustBadges />
 
       {/* Case Studies Section */}
       <ServiceCaseStudiesSection 

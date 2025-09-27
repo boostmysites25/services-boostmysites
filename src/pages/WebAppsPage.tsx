@@ -12,6 +12,7 @@ import DynamicContactForm from "@/components/DynamicContactForm";
 import { Link } from "react-scroll";
 import ServiceReviewsSection from "@/components/ServiceReviewsSection";
 import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
+import TrustBadges from "@/components/TrustBadges";
 
 interface WebAppsPageProps {
   salespersonData?: any;
@@ -42,6 +43,7 @@ const WebAppsPage = ({
       {/* <Header /> */}
       <WebAppsHero />
       <WebAppsPortfolio />
+      <TrustBadges />
       <WebAppsCTA />
       <WebAppsCaseStudies />
       

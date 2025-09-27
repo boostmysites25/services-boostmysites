@@ -3,6 +3,7 @@ import LandingPageContactForm from "@/components/LandingPageContactForm";
 import { Link } from "react-scroll";
 import ServiceReviewsSection from "@/components/ServiceReviewsSection";
 import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
+import TrustBadges from "@/components/TrustBadges";
 import {
   Smartphone,
   Zap,
@@ -183,6 +184,9 @@ const MobileAppsPage = ({
           </div>
         </div>
       </section>
+
+      {/* Trust Badges Section */}
+      <TrustBadges />
 
       {/* Reviews Section */}
       <ServiceReviewsSection

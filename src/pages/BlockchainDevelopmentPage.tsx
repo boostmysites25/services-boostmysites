@@ -5,6 +5,7 @@ import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
 import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
+import TrustBadges from '@/components/TrustBadges';
 
 interface BlockchainDevelopmentPageProps {
   salespersonData?: any;
@@ -135,6 +136,7 @@ const BlockchainDevelopmentPage = ({
       </section>
 
       <ServicePortfolioSection serviceId="blockchain-development" serviceName="Blockchain Development" accentColor="yellow" />
+      <TrustBadges />
       <ServiceCaseStudiesSection serviceName="Blockchain Development" caseStudies={[{client: 'CryptoFinance', industry: 'DeFi', challenge: 'Need secure DeFi platform', solution: 'Smart contract development', results: ['99.9% security', '$50M locked', '100k users', 'Zero hacks'], testimonial: "Secure and scalable DeFi platform", clientName: 'Alex Chen', clientRole: 'CTO, CryptoFinance', clientImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80', duration: '12 weeks', teamSize: '4 developers'}]} accentColor="text-yellow-400" />
       
       {/* Dynamic Contact Form - injected after Success Stories if URL parameters exist */}

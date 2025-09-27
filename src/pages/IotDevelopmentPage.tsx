@@ -5,6 +5,7 @@ import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
 import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
+import TrustBadges from '@/components/TrustBadges';
 
 interface IotDevelopmentPageProps {
   salespersonData?: any;
@@ -219,6 +220,9 @@ const IotDevelopmentPage = ({
         serviceName="IoT Development"
         accentColor="orange"
       />
+
+      {/* Trust Badges Section */}
+      <TrustBadges />
 
       {/* Case Studies Section */}
       <ServiceCaseStudiesSection 

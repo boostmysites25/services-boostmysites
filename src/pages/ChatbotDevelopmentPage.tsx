@@ -6,6 +6,7 @@ import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
 import ServiceReviewsSection from '@/components/ServiceReviewsSection';
 import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
+import TrustBadges from '@/components/TrustBadges';
 
 interface ChatbotDevelopmentPageProps {
   salespersonData?: unknown;
@@ -220,6 +221,9 @@ const ChatbotDevelopmentPage = ({
         serviceName="Chatbot Development"
         accentColor="teal"
       />
+
+      {/* Trust Badges Section */}
+      <TrustBadges />
 
       {/* Case Studies Section */}
       <ServiceCaseStudiesSection 

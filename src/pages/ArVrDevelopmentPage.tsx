@@ -5,6 +5,7 @@ import ServiceCaseStudiesSection from '@/components/ServiceCaseStudiesSection';
 import ServicePricingSection from '@/components/ServicePricingSection';
 import DynamicContactForm from '@/components/DynamicContactForm';
 import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
+import TrustBadges from '@/components/TrustBadges';
 
 interface ArVrDevelopmentPageProps {
   salespersonData?: any;
@@ -137,6 +138,9 @@ const ArVrDevelopmentPage = ({
 
       {/* Portfolio Section */}
       <ServicePortfolioSection serviceId="ar-vr-development" serviceName="AR/VR Development" accentColor="green" />
+
+      {/* Trust Badges Section */}
+      <TrustBadges />
 
       {/* Case Studies Section */}
       <ServiceCaseStudiesSection serviceName="AR/VR Development" caseStudies={[
