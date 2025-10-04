@@ -402,7 +402,7 @@ const Services = () => {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex space-x-4 pt-4">
+                        {/* <div className="flex space-x-4 pt-4">
                           <Link
                             to={service.route}
                             className={`flex-1 inline-flex items-center justify-center px-6 py-3 rounded-xl ${colors.button} border font-medium transition-all duration-300`}
@@ -414,7 +414,7 @@ const Services = () => {
                           >
                             Get Quote
                           </button>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

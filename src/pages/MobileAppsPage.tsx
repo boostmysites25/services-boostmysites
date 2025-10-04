@@ -12,6 +12,7 @@ import {
   Globe,
   TrendingUp,
 } from "lucide-react";
+import DynamicContactForm from "@/components/DynamicContactForm";
 
 interface MobileAppsPageProps {
   salespersonData?: any;
@@ -90,7 +91,7 @@ const MobileAppsPage = ({
         /* keep data close to usage for clarity */
       })()}
       {/** Mobile reviews */}
-      
+
       {/* Reviews array */}
       {/* Using concise in-file constant to avoid separate file overhead */}
       {null}
@@ -274,11 +275,10 @@ const MobileAppsPage = ({
       </section>
 
       {salespersonData && (
-        <LandingPageContactForm
-          salespersonData={salespersonData}
-          salesperson={salesperson}
-          service={service}
-          salespersonEmail={salespersonEmail}
+        <DynamicContactForm
+          position="after-success-stories"
+          accentColor="pink"
+          backgroundColor="transparent"
         />
       )}
       <FloatingWhatsAppButton />

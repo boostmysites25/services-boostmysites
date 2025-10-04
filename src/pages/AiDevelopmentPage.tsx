@@ -319,6 +319,7 @@ const AiDevelopmentPage = ({
         pricingTiers={pricingTiers}
         accentColor="text-purple-400"
         buttonAccentColor="purple"
+        handleGetStarted={handleGetStarted}
       />
 
       {/* Separator after Pricing */}

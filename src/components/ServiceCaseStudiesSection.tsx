@@ -53,7 +53,7 @@ const ServiceCaseStudiesSection = ({ serviceName, caseStudies, accentColor = "te
         <div className="text-center mb-16">
           <h2 className={`text-4xl font-bold mb-4 ${getHeadingColorClass(accentColor)}`}>Success Stories</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Real results from our {serviceName.toLowerCase()} projects
+            Real results from our {serviceName} projects
           </p>
         </div>
         <div className="space-y-16">

@@ -225,7 +225,6 @@ const SalespersonContactForm = ({
       to: salespersonEmail,
     };
 
-    console.log(salespersonEmail);
 
     try {
       const res = await axios.post(

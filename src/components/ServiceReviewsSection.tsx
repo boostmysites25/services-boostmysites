@@ -84,7 +84,7 @@ const ServiceReviewsSection = ({ serviceName, reviews, accentColor = 'purple' }:
         <div className="text-center mb-12">
           <h2 className={`text-4xl font-bold mb-4 ${headingColorClass}`}>What Our Clients Say</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Real feedback from our {serviceName.toLowerCase()} projects
+            Real feedback from our {serviceName} projects
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
