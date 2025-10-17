@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Plus, ArrowLeft, Copy, ExternalLink, Info } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Plus,
+  ArrowLeft,
+  Copy,
+  ExternalLink,
+  Info,
+  Search,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { SalespersonForm } from "@/components/admin/salesperson/SalespersonForm";
@@ -17,6 +25,7 @@ export const LinkGenerator = () => {
   const [salespersons, setSalespersons] = useState<SalespersonLink[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [editingSalesperson, setEditingSalesperson] = useState<
     SalespersonLink | undefined
   >();
@@ -62,6 +71,31 @@ export const LinkGenerator = () => {
     navigator.clipboard.writeText(text);
     toast.success("Link copied to clipboard!");
   };
+
+  // Filter salespersons based on search query
+  const filteredSalespersons = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return salespersons;
+    }
+
+    const query = searchQuery.toLowerCase();
+    return salespersons.filter((salesperson) => {
+      // Search by display name
+      const displayNameMatch = salesperson.display_name
+        .toLowerCase()
+        .includes(query);
+
+      // Search by link (salesperson_name is the URL slug)
+      const linkMatch = salesperson.salesperson_name
+        .toLowerCase()
+        .includes(query);
+
+      // Search by email
+      const emailMatch = salesperson.email.toLowerCase().includes(query);
+
+      return displayNameMatch || linkMatch || emailMatch;
+    });
+  }, [salespersons, searchQuery]);
 
   if (isLoading) {
     return (
@@ -249,10 +283,27 @@ export const LinkGenerator = () => {
                   </div>
                 </CardContent>
               </Card>
+              {/* Search Bar */}
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="Search by salesperson name, link, or email..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 pr-4 py-6 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:border-cyan-500 focus:ring-cyan-500 text-lg"
+                />
+                {searchQuery && (
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-sm text-gray-400">
+                    {filteredSalespersons.length} result
+                    {filteredSalespersons.length !== 1 ? "s" : ""}
+                  </div>
+                )}
+              </div>
             </div>
 
             <SalespersonList
-              salespersons={salespersons}
+              salespersons={filteredSalespersons}
               onEdit={handleEdit}
               onRefresh={loadSalespersons}
             />
