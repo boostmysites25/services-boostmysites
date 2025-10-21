@@ -42,6 +42,14 @@ const WebAppsPage = ({
     >
       {/* <Header /> */}
       <WebAppsHero />
+      
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="cyan"
+        backgroundColor="transparent"
+      />
+      
       <WebAppsPortfolio />
       <TrustBadges />
       <WebAppsCTA />

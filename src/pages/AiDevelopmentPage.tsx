@@ -200,6 +200,13 @@ const AiDevelopmentPage = ({
         </div>
       </section>
 
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="purple"
+        backgroundColor="transparent"
+      />
+
       {/* Portfolio Section */}
       <ServicePortfolioSection 
         serviceId="ai-development" 

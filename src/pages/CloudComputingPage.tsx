@@ -199,6 +199,13 @@ const CloudComputingPage = ({
         </div>
       </section>
 
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="indigo"
+        backgroundColor="transparent"
+      />
+
       {/* Portfolio Section */}
       <ServicePortfolioSection 
         serviceId="cloud-computing" 

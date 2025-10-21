@@ -123,6 +123,13 @@ const MobileAppsPage = ({
         </div>
       </section>
 
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="purple"
+        backgroundColor="transparent"
+      />
+
       {/* Features Section */}
       <section className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-6">

@@ -214,6 +214,13 @@ const GameDevelopmentPage = ({
         </div>
       </section>
 
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="pink"
+        backgroundColor="transparent"
+      />
+
       {/* Portfolio Section */}
       <ServicePortfolioSection 
         serviceId="game-development"

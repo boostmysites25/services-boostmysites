@@ -215,6 +215,13 @@ const ChatbotDevelopmentPage = ({
         </div>
       </section>
 
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="teal"
+        backgroundColor="transparent"
+      />
+
       {/* Portfolio Section */}
       <ServicePortfolioSection 
         serviceId="chatbot-development"

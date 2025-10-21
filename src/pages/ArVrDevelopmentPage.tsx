@@ -136,6 +136,13 @@ const ArVrDevelopmentPage = ({
         </div>
       </section>
 
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="green"
+        backgroundColor="transparent"
+      />
+
       {/* Portfolio Section */}
       <ServicePortfolioSection serviceId="ar-vr-development" serviceName="AR/VR Development" accentColor="green" />
 

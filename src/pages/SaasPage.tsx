@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 import ServiceReviewsSection from "@/components/ServiceReviewsSection";
 import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
 import TrustBadges from "@/components/TrustBadges";
+import DynamicContactForm from "@/components/DynamicContactForm";
 import {
   Cloud,
   Zap,
@@ -112,6 +113,13 @@ const SaasPage = ({
           </div>
         </div>
       </section>
+
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="blue"
+        backgroundColor="transparent"
+      />
 
       {/* Features Section */}
       <section className="py-20 bg-gray-900/50">

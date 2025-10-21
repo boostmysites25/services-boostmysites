@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 import ServiceReviewsSection from "@/components/ServiceReviewsSection";
 import FloatingWhatsAppButton from "@/components/ui/FloatingWhatsAppButton";
 import TrustBadges from "@/components/TrustBadges";
+import DynamicContactForm from "@/components/DynamicContactForm";
 import {
   Phone,
   Bot,
@@ -112,6 +113,13 @@ const AiCallingPage = ({
           </div>
         </div>
       </section>
+
+      {/* Contact Form - Below Hero */}
+      <DynamicContactForm 
+        position="below-hero"
+        accentColor="orange"
+        backgroundColor="transparent"
+      />
 
       {/* Trust Badges Section */}
       <TrustBadges />

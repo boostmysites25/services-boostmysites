@@ -89,7 +89,7 @@ const App = () => (
           <Route path="/ai-automation" element={<AiAutomationPage />} />
           <Route path="/ai-calling" element={<AiCallingPage />} />
 
-          {/* Additional service pages */}
+          {/* Additional landing pages */}
           <Route path="/ai-development" element={<AiDevelopmentPage />} />
           <Route
             path="/blockchain-development"
