@@ -11,7 +11,7 @@ interface CaseStudyHeroProps {
 const CaseStudyHero = ({ project }: CaseStudyHeroProps) => {
   const navigate = useNavigate();
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-b from-gray-900 to-black overflow-hidden">
+    <section className="relative min-h-screen flex items-center bg-gradient-to-b from-gray-900 to-black overflow-hidden py-5">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <OptimizedImage

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import LandingPageContactForm from "@/components/LandingPageContactForm";
 import { Link } from "react-scroll";
 import ServiceReviewsSection from "@/components/ServiceReviewsSection";
@@ -11,13 +11,16 @@ import {
   Shield,
   Globe,
   TrendingUp,
+  ArrowRight,
 } from "lucide-react";
 import DynamicContactForm from "@/components/DynamicContactForm";
+import { getPortfolioData } from "@/services/portfolioDataService";
+import { Service, Project } from "@/data/projects";
 
 interface MobileAppsPageProps {
-  salespersonData?: any;
-  salesperson?: any;
-  service?: any;
+  salespersonData?: unknown;
+  salesperson?: unknown;
+  service?: unknown;
   salespersonEmail?: string;
 }
 
@@ -27,6 +30,44 @@ const MobileAppsPage = ({
   service,
   salespersonEmail,
 }: MobileAppsPageProps) => {
+  const [mobileProjects, setMobileProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Load mobile app projects from database
+  useEffect(() => {
+    const loadMobileProjects = async () => {
+      try {
+        console.log('MobileAppsPage - Loading mobile app projects from database...');
+        setLoading(true);
+        const data = await getPortfolioData();
+        
+        // Find mobile apps service
+        const mobileService = data.find(service => 
+          service.id === 'mobile-apps' || 
+          service.title.toLowerCase().includes('mobile') ||
+          service.title.toLowerCase().includes('app')
+        );
+        
+        if (mobileService) {
+          console.log('MobileAppsPage - Found mobile service:', mobileService.title, 'with', mobileService.projects.length, 'projects');
+          setMobileProjects(mobileService.projects);
+        } else {
+          console.log('MobileAppsPage - No mobile service found, using all projects');
+          // If no specific mobile service, get all projects
+          const allProjects = data.flatMap(service => service.projects);
+          setMobileProjects(allProjects);
+        }
+      } catch (error) {
+        console.error('MobileAppsPage - Error loading mobile projects:', error);
+        setMobileProjects([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMobileProjects();
+  }, []);
+
   const features = [
     {
       icon: Smartphone,
@@ -86,15 +127,7 @@ const MobileAppsPage = ({
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/** Reviews data for Mobile Applications */}
-      {(() => {
-        /* keep data close to usage for clarity */
-      })()}
-      {/** Mobile reviews */}
-
-      {/* Reviews array */}
-      {/* Using concise in-file constant to avoid separate file overhead */}
-      {null}
+      {/* Reviews data for Mobile Applications */}
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 pointer-events-none"></div>
@@ -125,7 +158,7 @@ const MobileAppsPage = ({
 
       {/* Contact Form - Below Hero */}
       <DynamicContactForm 
-        position="below-hero"
+        position="after-success-stories"
         accentColor="purple"
         backgroundColor="transparent"
       />
@@ -190,6 +223,99 @@ const MobileAppsPage = ({
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Mobile App Portfolio Section */}
+      <section className="py-20 bg-gray-900/30">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-purple-400">Our Mobile App Portfolio</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Discover our successful mobile applications that have transformed businesses and delighted users across various industries.
+            </p>
+          </div>
+          
+          {loading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="text-white text-lg">Loading mobile app projects...</div>
+            </div>
+          ) : mobileProjects.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-white text-lg mb-4">No mobile app projects available yet.</div>
+              <div className="text-gray-400">Please check back later for our latest mobile applications.</div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {mobileProjects.map((project, index) => (
+                  <div 
+                    key={project.id || index}
+                    className="group bg-gray-800/50 border border-gray-700/50 hover:border-purple-400/50 transition-all duration-300 rounded-2xl overflow-hidden cursor-pointer"
+                    onClick={() => window.location.href = `/case-study/${project.slug || project.id}`}
+                  >
+                    <div className="relative overflow-hidden">
+                      <img 
+                        src={project.image || "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} 
+                        alt={project.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          {project.technologies?.slice(0, 2).map((tech: string, idx: number) => (
+                            <span key={idx} className="text-xs px-2 py-1 bg-purple-500/20 text-purple-300 rounded">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-3 group-hover:text-purple-300 transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-400 mb-4 text-sm leading-relaxed">
+                        {project.description}
+                      </p>
+                      <div className="mb-4">
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {project.technologies?.slice(0, 3).map((tech: string, idx: number) => (
+                            <span key={idx} className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          <div>Client: {project.client}</div>
+                          <div>Timeline: {project.timeline}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center text-purple-300 hover:text-purple-200 transition-colors text-sm font-medium">
+                        View Case Study <ArrowRight className="ml-1 h-4 w-4" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Portfolio CTA */}
+              <div className="text-center mt-16">
+                <h3 className="text-2xl font-bold mb-4 text-white">Ready to Build Your Mobile App?</h3>
+                <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                  Join our portfolio of successful mobile applications. Let's create something amazing together.
+                </p>
+                <Link
+                  to="contact"
+                  smooth
+                  offset={-100}
+                  className="inline-block px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl font-semibold hover:from-purple-400 hover:to-pink-500 transition-all duration-300 transform hover:scale-105"
+                >
+                  Start Your Project
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
