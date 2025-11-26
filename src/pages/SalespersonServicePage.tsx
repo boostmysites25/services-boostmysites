@@ -225,7 +225,7 @@ const SalespersonServicePage = () => {
       <GoogleTagInjector salespersonData={salespersonData.salesperson} tagType="gtag" />
       
       {/* Salesperson Banner */}
-      <div className="fixed top-0 left-0 right-0 z-[999] bg-gradient-to-r from-primary/90 to-secondary/90 backdrop-blur-sm border-b border-border">
+      <div className="fixed top-0 left-0 right-0 z-[999] bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
         <div className="container mx-auto px-6 py-3">
           <div className="flex items-center justify-center text-center">
             <div className="text-white">
@@ -239,7 +239,7 @@ const SalespersonServicePage = () => {
                 Mail to:{" "}
                 <a
                   href={`mailto:${salespersonData.salesperson.email}`}
-                  className="underline hover:no-underline"
+                  className="underline hover:no-underline hover:text-gray-300 transition-colors"
                 >
                   {salespersonData.salesperson.email}
                 </a>
@@ -248,7 +248,7 @@ const SalespersonServicePage = () => {
                     {" • "}
                     <a
                       href={`tel:${salespersonData.salesperson.phone}`}
-                      className="underline hover:no-underline"
+                      className="underline hover:no-underline hover:text-gray-300 transition-colors"
                     >
                       Call: {salespersonData.salesperson.phone}
                     </a>
