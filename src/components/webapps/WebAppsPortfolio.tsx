@@ -41,7 +41,7 @@ const WebAppsPortfolio = () => {
             Our Web Application Portfolio
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Showcasing our latest web application projects and their impact
+          1000+ Sucessful Projects Delivered Across Multiple Industries
           </p>
         </div>
 

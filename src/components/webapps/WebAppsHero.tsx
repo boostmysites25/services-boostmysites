@@ -13,8 +13,7 @@ const WebAppsHero = () => {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Transform your business with custom web applications built using
-            cutting-edge technologies and modern development practices.
+            1000+ Projects Delivered | Business-Focused Websites | Trusted by 1000+ Clients
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-50">
             <Link
@@ -23,9 +22,12 @@ const WebAppsHero = () => {
               offset={-100}
               className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl font-semibold hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 relative z-50 cursor-pointer"
             >
-              Start Your Project
+              Get Free Website Consultation
             </Link>
           </div>
+          <p className="mt-3 text-gray-300 mb-8 leading-relaxed">
+          You can also chat on Whatsapp for Instant Quote.
+          </p>
         </div>
       </div>
     </section>
