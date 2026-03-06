@@ -21,7 +21,7 @@ const FloatingWhatsAppButton = ({
   // Format phone number for WhatsApp and tel link (strip non-digits for tel)
   const formattedPhone = formatPhoneForWhatsApp(phoneNumber);
   const whatsappUrl = `https://wa.me/${formattedPhone}`;
-  const telUrl = `tel:${phoneNumber.replace(/\D/g, "")}`;
+  const telUrl = `tel:+${phoneNumber.replace(/\D/g, "")}`;
 
   return (
     <>
@@ -35,14 +35,14 @@ const FloatingWhatsAppButton = ({
           aria-label="Call us now"
         >
           {/* Tooltip */}
-          {/* <div
-            className={`absolute left-full ml-3 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap transition-all duration-300 transform ${
-              isCallHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"
+          <div
+            className={`absolute left-full ml-3 px-3 py-2 bg-white text-black text-[12px] rounded-lg shadow-lg whitespace-nowrap transition-all duration-300 transform ${
+              isCallHovered ? "opacity-100 translate-x-0" : "opacity-100 translate-x-0"
             }`}
           >
             Call Now
-            <div className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 w-0 h-0 border-r-4 border-r-gray-900 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
-          </div> */}
+            <div className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 w-0 h-0 border-r-4 border-r-white border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+          </div>
 
           {/* Button */}
           <div className="w-14 h-14 bg-green-600 hover:bg-green-700 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform hover:scale-110 animate-pulse">
@@ -66,14 +66,24 @@ const FloatingWhatsAppButton = ({
           aria-label="Chat with us on WhatsApp"
         >
           {/* Tooltip */}
-          <div
-            className={`absolute right-full mr-3 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap transition-all duration-300 transform ${
+          {/* <div
+            className={`absolute right-full mr-3 px-3 py-2 bg-gray-900 text-white text-[12px] rounded-lg shadow-lg whitespace-nowrap transition-all duration-300 transform ${
               isWhatsAppHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"
             }`}
           >
             Contact Us
             <div className="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-900 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+          </div> */}
+
+<div
+            className={`absolute right-full mr-3 px-3 py-2 bg-white text-black text-[12px] rounded-lg shadow-lg whitespace-nowrap transition-all duration-300 transform ${
+              isWhatsAppHovered ? "opacity-100 translate-x-0" : "opacity-100 translate-x-0"
+            }`}
+          >
+            Contact Us
+            <div className="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 w-0 h-0 border-l-4 border-l-white border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
           </div>
+
 
           {/* Button */}
           <div className="w-14 h-14 bg-[#25D366] hover:bg-[#20BA5A] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform hover:scale-110 animate-pulse">
